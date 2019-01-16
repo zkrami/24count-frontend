@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {RepositoryItemsService} from '../../services/repository-items.service';
+import {RepositoryItemsService} from '../../../services/repository-items.service';
 import { ApiHttpClient } from 'src/app/services/api-http-client.service';
-import {Item} from '../../models/Item';
+import {Item} from '../../../models/Item';
 
 @Component({
   selector: 'app-items',

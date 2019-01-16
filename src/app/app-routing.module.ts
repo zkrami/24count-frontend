@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {ItemsComponent} from './repository/items/items.component';
-import {RepositoryModule} from './repository/repository.module';
-import {LoginComponent} from './auth/login/login.component';
-import {AuthModule} from './auth/auth.module';
+import {ItemsComponent} from './site/repository/items/items.component';
+import {RepositoryModule} from './site/repository/repository.module';
+import {LoginComponent} from './site/auth/login/login.component';
+import {AuthModule} from './site/auth/auth.module';
 
 const routes: Routes = [
 

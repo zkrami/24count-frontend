@@ -5,8 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {RequestInterceptor} from './interceptors/request-interceptor.service';
-import {RepositoryModule} from './repository/repository.module';
-import { ApiHttpClient } from './services/api-http-client.service';
+import {RepositoryModule} from './site/repository/repository.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {LayoutModule} from './site/layout/layout.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ApiHttpClient } from './services/api-http-client.service';
     HttpClientModule ,
     RepositoryModule,
     AppRoutingModule,
-
+    BrowserAnimationsModule,
+    LayoutModule
   ],
   providers: [
     {
@@ -26,6 +28,6 @@ import { ApiHttpClient } from './services/api-http-client.service';
       multi: true
     } 
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent] ,
 })
 export class AppModule { }

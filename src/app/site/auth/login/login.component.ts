@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from '../../services/auth.service';
+import {AuthService} from '../../../services/auth.service';
 import {of, throwError as observableThrowError, throwError} from 'rxjs';
 import {catchError, finalize, map, switchMap} from 'rxjs/operators';
 
