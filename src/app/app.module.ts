@@ -1,13 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { AppRoutingModule } from 'app-routing.module';
+import { AppComponent } from 'app.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {RequestInterceptor} from './interceptors/request-interceptor.service';
-import {RepositoryModule} from './site/repository/repository.module';
+import {RequestInterceptor} from 'interceptors/request-interceptor.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {LayoutModule} from './site/layout/layout.module';
+import {DashboardModule} from 'site/dashboard/dashboard.module';
 
 @NgModule({
   declarations: [
@@ -16,10 +15,9 @@ import {LayoutModule} from './site/layout/layout.module';
   imports: [
     BrowserModule,
     HttpClientModule ,
-    RepositoryModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
-    LayoutModule
+    DashboardModule,
+    AppRoutingModule,
   ],
   providers: [
     {
