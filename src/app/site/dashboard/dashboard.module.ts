@@ -8,7 +8,6 @@ import {ItemsComponent as RepositoryItemsComponent} from './repository/items/ite
 
 
 let routes : Routes = [
-
   { path : 'dashboard' , component:DashboardComponent ,
     children :[
       {path : 'test' , component : RepositoryItemsComponent}
