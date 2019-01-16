@@ -6,6 +6,7 @@ import { ItemsComponent } from './items/items.component';
   declarations: [ItemsComponent],
   imports: [
     CommonModule
-  ]
+  ] ,
+  exports : [ItemsComponent]
 })
 export class RepositoryModule { }

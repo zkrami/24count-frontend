@@ -13,7 +13,8 @@ export class ApiHttpClient {
 
   apiEndPoint = environment.apiEndPoint;
 
-  constructor(private http: HttpClient, private appConfig: AppConfigService) {
+  constructor(private http: HttpClient, private appConfig: AppConfigService) {  
+    
   }
 
 
@@ -23,11 +24,10 @@ export class ApiHttpClient {
         let apiResponse = new ApiResponse();
         apiResponse.status = response.status;
         apiResponse.data = response.body ;
-        console.log(apiResponse);
         return apiResponse;
       }),
       catchError( err => {
-        this.appConfig.httpError(err);
+        this.appConfig.httpError(url , err);
         return throwError(err);
       }));
 
@@ -39,11 +39,11 @@ export class ApiHttpClient {
         let apiResponse = new ApiResponse();
         apiResponse.status = response.status;
         apiResponse.data = response.body ;
-        console.log(apiResponse);
+        
         return apiResponse;
       }),
       catchError( err => {
-        this.appConfig.httpError(err);
+        this.appConfig.httpError(url , err);
         return throwError(err);
       }));
 

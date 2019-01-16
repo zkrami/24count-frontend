@@ -12,11 +12,10 @@ export class RepositoryItemsService {
   constructor(private http: ApiHttpClient) {
   }
 
-
   get() : Observable<Item[]> {
-    return this.http.get('/items').pipe( map(response => {
-
-      return null ;
+    return this.http.get('/items').pipe( map( response  => {
+      
+      return response.data;
     }));
   }
 

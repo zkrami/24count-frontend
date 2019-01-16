@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {RepositoryItemsService} from '../../services/repository-items.service';
-import { ApiHttpClient } from 'src/app/services/api-http-client.service';
-import {Item} from '../../models/Item';
 
 @Component({
   selector: 'app-items',
@@ -10,14 +8,9 @@ import {Item} from '../../models/Item';
 })
 export class ItemsComponent implements OnInit {
 
-  constructor(private itemsService : RepositoryItemsService) { }
+  constructor() { }
 
-
-  items : Item[];
-  async ngOnInit() {
-
-    this.items  = await this.itemsService.get().toPromise();
-    console.log(this.items);
+   ngOnInit() {
 
 
   }

@@ -10,8 +10,8 @@ export class AppConfigService {
   public log(message){
     console.log(message);
   }
-  public httpError(error){
-    console.log(error);
+  public httpError(url , error){
+    console.log(url);
   }
 
 }
