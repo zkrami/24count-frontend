@@ -7,6 +7,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {RequestInterceptor} from 'interceptors/request-interceptor.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DashboardModule} from 'site/dashboard/dashboard.module';
+import {ToastrModule} from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import {DashboardModule} from 'site/dashboard/dashboard.module';
     BrowserModule,
     HttpClientModule ,
     BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     DashboardModule,
     AppRoutingModule,
   ],

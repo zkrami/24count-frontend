@@ -3,6 +3,7 @@ import {finalize, map, tap} from 'rxjs/operators';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {ApiHttpClient} from './api-http-client.service';
 import {User} from '../models/User';
+import {ApiResponse} from 'models/ApiResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -48,7 +49,7 @@ export class AuthService {
     return this.http.get('/logout');
   }
 
-  public login(email: string, password: string, remember: boolean = true) {
+  public login(email: string, password: string, remember: boolean = true) : Observable<ApiResponse> {
 
     return this.http.post('/login', {email: email, password: password}).pipe(
       tap(apiResponse => {
