@@ -1,6 +1,6 @@
-<div class="login-wrapper full-width float-right" >
+<div class="login-wrapper full-width float-right"  >
   <mat-card>
-    <form (submit)="submit($event,form)"  #form="ngForm" method="post">
+    <form (submit)="submit($event)"  #form="ngForm" [formGroup]="loginForm" method="post" >
       <div>
         <mat-form-field class="full-width" color="accent">
           <input type="email" matInput placeholder="البريد الالكتروني" [formControl]="emailFormControl" name="email" required email="true"/>
@@ -28,7 +28,7 @@
       </div>
       <br/>
       <div class="full-width">
-        <button class="full-width" mat-raised-button color="accent" >Primary</button>
+        <button class="full-width" mat-raised-button color="accent" [disabled]="!loginForm.valid">ارسال</button>
       </div>
     </form >
   </mat-card>

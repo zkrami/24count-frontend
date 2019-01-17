@@ -6,8 +6,9 @@ import {AuthModule} from 'site/auth/auth.module';
 const routes: Routes = [
 
 
-  {path :'login' , component: LoginComponent }
-
+  {path :'login' , component: LoginComponent } ,
+  {path :'' , redirectTo : 'dashboard' , pathMatch : 'full'}  ,
+  {path :'**' , redirectTo : '' , pathMatch: 'full'}
 ];
 
 @NgModule({

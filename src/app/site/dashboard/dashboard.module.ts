@@ -5,10 +5,11 @@ import {RouterModule, Routes} from '@angular/router';
 import {LayoutModule} from './layout/layout.module';
 import {RepositoryModule} from './repository/repository.module';
 import {ItemsComponent as RepositoryItemsComponent} from './repository/items/items.component';
+import {AuthGuard} from 'auth.guard';
 
 
 let routes : Routes = [
-  { path : 'dashboard' , component:DashboardComponent ,
+  { path : 'dashboard' , component:DashboardComponent , canActivate : [AuthGuard],
     children :[
       {path : 'test' , component : RepositoryItemsComponent}
     ]}

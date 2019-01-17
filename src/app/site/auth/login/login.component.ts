@@ -3,7 +3,8 @@ import {AuthService} from '../../../services/auth.service';
 import {of, throwError as observableThrowError, throwError} from 'rxjs';
 import {catchError, finalize, map, switchMap} from 'rxjs/operators';
 import {ToastrService} from 'ngx-toastr';
-import {Form, FormControl, Validators} from '@angular/forms';
+import {Form, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,8 +13,6 @@ import {Form, FormControl, Validators} from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  public email;
-  public password;
   emailFormControl = new FormControl('', [
     Validators.required,
     Validators.email,
@@ -21,10 +20,17 @@ export class LoginComponent implements OnInit {
 
   passwordFormControl = new FormControl('', [
     Validators.required,
-    Validators.email,
   ]);
 
-  constructor(private authService: AuthService , private toastr : ToastrService) {
+  loginForm = new FormGroup(
+    {
+      email : this.emailFormControl,
+      password : this.passwordFormControl
+    }
+  );
+
+
+  constructor(private authService: AuthService , private toastr : ToastrService , private router : Router) {
 
   }
 
@@ -32,22 +38,16 @@ export class LoginComponent implements OnInit {
 
   }
 
-  async submit(e : Event  , form ) {
+  async submit(e : Event  ) {
 
-
-    alert('test');
-
-    console.log(form.valid);
-    return false;
     try {
-
-
-
-      let response = await this.authService.login(this.email, this.password).toPromise();
+      let response = await this.authService.login(this.emailFormControl.value, this.passwordFormControl.value).toPromise();
+      this.toastr.success("تم تسجيل الدخول بنجاح");
+      this.router.navigate(['/']);
 
     } catch (e) {
-      console.log(e);
-      this.toastr.error("test");
+
+      this.toastr.error("اسم المستخدم او كلمة المرور غير صالحة");
     }
   }
 }
