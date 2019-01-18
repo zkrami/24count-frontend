@@ -1,0 +1,37 @@
+<div class="row select-item " *ngIf="repositoryItem" dir="rtl">
+
+
+    <div class="col-lg-2">
+      <mat-form-field class="full-width" color="accent">
+        <input matInput [value]="repositoryItem.item.name" readonly placeholder="الاسم"/>
+      </mat-form-field>
+    </div>
+
+  <div class="col-lg-2">
+    <mat-form-field class="full-width" color="accent">
+      <input matInput [value]="repositoryItem.item.code" readonly placeholder="الرمز"/>
+    </mat-form-field>
+  </div>
+  <div class="col-lg-2">
+    <mat-form-field class="full-width" color="accent">
+      <input matInput [value]="repositoryItem.item.shape" readonly placeholder="الشكل"/>
+    </mat-form-field>
+  </div>
+  <div class="col-lg-2">
+    <mat-form-field class="full-width" color="accent">
+      <input matInput [value]="repositoryItem.item.identifier" readonly placeholder="المعرف"/>
+    </mat-form-field>
+  </div>
+  <div class="col-lg-2">
+    <mat-form-field class="full-width" color="accent">
+      <input matInput [value]="repositoryItem.item.size" readonly placeholder="الحجم"/>
+    </mat-form-field>
+  </div>
+  <div class="col-lg-2">
+    <mat-form-field class="full-width" color="accent">
+      <input matInput [value]="repositoryItem.item.factory" readonly placeholder="المصنع"/>
+    </mat-form-field>
+  </div>
+
+
+</div>

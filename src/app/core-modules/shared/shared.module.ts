@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import {MaterialComponentsModule} from '../material-components/material-components.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
-let modules = [MaterialComponentsModule , ReactiveFormsModule ,FormsModule ];
+let modules = [MaterialComponentsModule , ReactiveFormsModule ,FormsModule  ];
 @NgModule({
   declarations: [],
   imports: [

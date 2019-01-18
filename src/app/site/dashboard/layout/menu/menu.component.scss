@@ -1,0 +1,23 @@
+.side-menu{
+  background: #222D32;
+  height: 100%;
+  color:#b8c7ce;
+}
+
+.side-menu ul{
+
+  font-size:14px;
+  li{
+    padding-left:12px;
+  }
+  li a{
+    display: flex;
+    align-items: center;
+  }
+  mat-icon{
+    width: auto;
+    height:auto;
+    font-size:17px;
+    margin-right:5px;
+  }
+}

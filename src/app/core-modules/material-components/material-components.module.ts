@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MatButtonModule, MatCardModule, MatCheckboxModule, MatFormField, MatFormFieldModule, MatGridListModule, MatIcon, MatIconModule, MatInput, MatInputModule} from '@angular/material';
+import {MatButtonModule, MatCardModule, MatCheckboxModule, MatFormField, MatFormFieldModule, MatGridListModule, MatIcon, MatIconModule, MatInput, MatInputModule, MatPaginatorModule, MatTableModule} from '@angular/material';
 
 
 
-let components = [MatButtonModule , MatCheckboxModule , MatFormFieldModule , MatInputModule , MatIconModule , MatCardModule , MatGridListModule ];
+let components = [MatButtonModule , MatCheckboxModule , MatFormFieldModule , MatInputModule , MatIconModule , MatCardModule , MatGridListModule , MatTableModule , MatPaginatorModule  ];
 
 @NgModule({
   declarations: [],

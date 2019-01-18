@@ -1,0 +1,30 @@
+<div class="row " dir="rtl"  *ngIf="repositoryItem">
+  <div class="col-lg-2">
+    <mat-form-field  class="full-width" color="accent">
+      <input type="number" matInput  (keydown)="inputKeyDown($event.code)" name="count"  placeholder="العدد" [(ngModel)]="repositoryItem.count" #countInput />
+    </mat-form-field>
+  </div>
+  <div class="col-lg-2">
+    <mat-form-field  class="full-width" color="accent">
+      <input type="date" matInput (keydown)="inputKeyDown($event.code)" name="expiration" placeholder="تاريخ الصلاحية"  [(ngModel)]="repositoryItem.expiration"  />
+    </mat-form-field>
+  </div>
+  <div class="col-lg-2">
+    <mat-form-field  class="full-width" color="accent">
+      <input type="number" matInput (keydown)="inputKeyDown($event.code)" name="discount"    placeholder="الخصم" [(ngModel)]="repositoryItem.discount"  />
+    </mat-form-field>
+  </div>
+  <div class="col-lg-2">
+    <mat-form-field  class="full-width" color="accent">
+      <input type="number" matInput (keydown)="inputKeyDown($event.code)" name="bonus"  placeholder="بونص" [(ngModel)]="repositoryItem.bonus"  />
+    </mat-form-field>
+  </div>
+  <div class="col-lg-2">
+    <mat-form-field  class="full-width" color="accent">
+      <input type="number" matInput (keydown)="inputKeyDown($event.code)" name="net" placeholder="نت"  [(ngModel)]="repositoryItem.net"  />
+    </mat-form-field>
+  </div>
+  <div class="col-lg-2">
+    <button mat-button color="accent" mat-flat-button class="full-width" (click)="inputEnterPress()">حفظ</button>
+  </div>
+</div>

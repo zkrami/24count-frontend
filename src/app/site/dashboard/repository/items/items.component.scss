@@ -1,0 +1,17 @@
+@import "../../../../../variables.scss";
+tr{
+  transition:all 0.2s;
+  td{
+    transition:all 0.2s;
+  }
+}
+
+.selected-row {
+  background: rgba($accent , 0.8);
+  td {
+    color: #fff;
+  }
+}
+.error-row{
+  background: $danger;
+}

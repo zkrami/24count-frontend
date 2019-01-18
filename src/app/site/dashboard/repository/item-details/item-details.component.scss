@@ -1,0 +1,15 @@
+
+
+@import "../../../../../variables.scss";
+
+label , span{
+  text-align: right !important;
+}
+input{
+  text-align: right;
+  color:$accent;
+}
+.mat-form-field-underline{
+  background-color: rgba($accent,.42) !important;
+  display: none ;
+}

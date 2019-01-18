@@ -1,7 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
 
 
+html , body{
+   height: 100%; padding:0;
+}
+.row{
+  margin:0;
+
+}
 .full-width{
   width:100%;
+}
+.full-height{
+  height: 100%;
+}
+.no-padding{
+  padding:0;
 }

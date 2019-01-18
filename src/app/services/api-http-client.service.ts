@@ -13,13 +13,28 @@ export class ApiHttpClient {
 
   apiEndPoint = environment.apiEndPoint;
 
-  constructor(private http: HttpClient, private appConfig: AppConfigService) {  
+  constructor(public http: HttpClient, private appConfig: AppConfigService) {
     
   }
 
 
   public post(url: string, body: any | null) : Observable<ApiResponse> {
     return this.http.post(this.apiEndPoint +  url, body  , {observe : 'response'}).pipe(
+      map (response => {
+        let apiResponse = new ApiResponse();
+        apiResponse.status = response.status;
+        apiResponse.data = response.body ;
+        return apiResponse;
+      }),
+      catchError( err => {
+        this.appConfig.httpError(url , err);
+        return throwError(err);
+      }));
+
+  }
+  public put(url: string, body: any | null) : Observable<ApiResponse> {
+
+    return this.http.put(this.apiEndPoint +  url, body  , {observe : 'response'}).pipe(
       map (response => {
         let apiResponse = new ApiResponse();
         apiResponse.status = response.status;
@@ -48,4 +63,6 @@ export class ApiHttpClient {
       }));
 
   }
+
+
 }

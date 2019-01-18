@@ -6,12 +6,13 @@ import {LayoutModule} from './layout/layout.module';
 import {RepositoryModule} from './repository/repository.module';
 import {ItemsComponent as RepositoryItemsComponent} from './repository/items/items.component';
 import {AuthGuard} from 'auth.guard';
+import {SharedModule} from 'core-modules/shared/shared.module';
 
 
 let routes : Routes = [
   { path : 'dashboard' , component:DashboardComponent , canActivate : [AuthGuard],
     children :[
-      {path : 'test' , component : RepositoryItemsComponent}
+      {path : 'repository/items' , component : RepositoryItemsComponent}
     ]}
 ];
 
@@ -21,6 +22,7 @@ let routes : Routes = [
     CommonModule,
     LayoutModule,
     RepositoryModule,
+    SharedModule,
     RouterModule.forChild(routes)
   ]
 })
