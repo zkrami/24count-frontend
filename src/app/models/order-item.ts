@@ -1,4 +1,4 @@
-import {Item} from 'models/Item';
+import {Item} from 'models/item';
 import {IToRequest} from 'models/to-request';
 
 export class OrderItem implements IToRequest{

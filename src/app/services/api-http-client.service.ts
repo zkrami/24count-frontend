@@ -4,7 +4,7 @@ import {environment} from '../../environments/environment';
 import {catchError, map} from 'rxjs/operators';
 import {AppConfigService} from './app-config.service';
 import {Observable, throwError} from 'rxjs';
-import {ApiResponse} from '../models/ApiResponse';
+import {ApiResponse} from '../models/api-response';
 
 @Injectable({
   providedIn: 'root'

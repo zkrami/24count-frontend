@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {finalize, map, tap} from 'rxjs/operators';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {ApiHttpClient} from './api-http-client.service';
-import {User} from '../models/User';
-import {ApiResponse} from 'models/ApiResponse';
+import {User} from '../models/user';
+import {ApiResponse} from 'models/api-response';
 
 @Injectable({
   providedIn: 'root'

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {ApiHttpClient} from './api-http-client.service';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {RepositoryItem} from 'models/RepositoryItem';
+import {RepositoryItem} from 'models/repository-item';
 import {Repository} from 'models/repository';
 
 @Injectable({
@@ -23,7 +23,7 @@ export class RepositoryService {
   }
 
   items() : Observable<RepositoryItem[]> {
-    return this.http.get('/repository/items').pipe( map( response  => {
+    return this.http.get('/repository-items/items').pipe( map( response  => {
 
       // map response to RepositoryItem
       // @todo measure time without map

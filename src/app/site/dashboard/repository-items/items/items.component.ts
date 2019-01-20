@@ -1,9 +1,9 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {RepositoryService} from 'services/repository.service';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
-import {RepositoryItem} from 'models/RepositoryItem';
+import {RepositoryItem} from 'models/repository-item';
 import {ToastrService} from 'ngx-toastr';
-import {ItemDetailsInputComponent} from 'site/dashboard/repository/item-details-input/item-details-input.component';
+import {ItemDetailsInputComponent} from 'site/dashboard/repository-items/item-details-input/item-details-input.component';
 
 @Component({
   selector: 'app-items',

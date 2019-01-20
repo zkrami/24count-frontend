@@ -13,4 +13,4 @@ import { ItemDetailsInputComponent } from './item-details-input/item-details-inp
   ] ,
   exports : [ItemsComponent]
 })
-export class RepositoryModule { }
+export class RepositoryItemsModule { }

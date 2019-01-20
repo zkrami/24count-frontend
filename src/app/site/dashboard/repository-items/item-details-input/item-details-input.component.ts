@@ -1,5 +1,5 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {RepositoryItem} from 'models/RepositoryItem';
+import {RepositoryItem} from 'models/repository-item';
 
 @Component({
   selector: 'app-item-details-input',

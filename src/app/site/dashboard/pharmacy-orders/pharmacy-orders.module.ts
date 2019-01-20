@@ -14,4 +14,4 @@ import { RepositoryFilterComponent } from './repository-filter/repository-filter
     SharedModule
   ]
 })
-export class OrderModule { }
+export class PharmacyOrdersModule { }

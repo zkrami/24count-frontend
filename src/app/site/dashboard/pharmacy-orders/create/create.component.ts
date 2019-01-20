@@ -2,14 +2,14 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {MatButton, MatInput, MatPaginator, MatTableDataSource} from '@angular/material';
 import {ToastrService} from 'ngx-toastr';
 import {ItemsService} from 'services/items.service';
-import {Item} from 'models/Item';
+import {Item} from 'models/item';
 import {OrderService} from 'services/order.service';
 import {Observable} from 'rxjs';
 import {FormControl} from '@angular/forms';
 import {map, startWith} from 'rxjs/operators';
 import {Order} from 'models/order';
 import {OrderItem} from 'models/order-item';
-import {RepositoryFilterComponent} from 'site/dashboard/order/repository-filter/repository-filter.component';
+import {RepositoryFilterComponent} from 'site/dashboard/pharmacy-orders/repository-filter/repository-filter.component';
 
 @Component({
   selector: 'app-create',
@@ -124,14 +124,10 @@ export class CreateComponent implements OnInit {
 
   }
 
-  refreshTableData() {
-    this.dataSource.data = this.order.items;
-    this.refreshTable();
-  }
 
   async save() {
 
-    // get repository id
+    // get repository-items id
     this.order.repository_id = this.repositoryComponent.value ? this.repositoryComponent.value.id : null;
 
     this.disable();
@@ -139,10 +135,7 @@ export class CreateComponent implements OnInit {
     try {
 
       let order = await this.orderService.update(this.order).toPromise();
-      console.log(order);
-      //this.order = order;
-      this.refreshTableData();
-
+      this.order.id = order.id;
       this.toastr.success('لقد تم حفظ الفاتورة بنجاح');
     } catch (e) {
       this.toastr.error('لقد حدث خطأ ما الرجاء المحاولة لاحقاً');
