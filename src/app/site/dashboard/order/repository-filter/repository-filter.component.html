@@ -1,0 +1,10 @@
+<mat-form-field class="full-width">
+  <input #filter   type="text" placeholder="المستودع"
+         aria-label="Number" matInput [formControl]="filterControl" [matAutocomplete]="auto">
+  <mat-autocomplete autoActiveFirstOption (optionSelected)="selectedItemChange($event.option.value)"
+                    #auto="matAutocomplete" [displayWith]="repositoryDisplay">
+    <mat-option *ngFor="let repository of filteredRepositories | async" [value]="repository">
+      {{repository.name}}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

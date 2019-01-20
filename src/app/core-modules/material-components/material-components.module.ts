@@ -1,19 +1,21 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import {MatButtonModule, MatCardModule, MatCheckboxModule, MatFormField, MatFormFieldModule, MatGridListModule, MatIcon, MatIconModule, MatInput, MatInputModule, MatPaginatorModule, MatTableModule} from '@angular/material';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {MatAutocompleteModule, MatButtonModule, MatCardModule, MatCheckboxModule, MatFormFieldModule, MatGridListModule, MatIconModule, MatInputModule, MatPaginatorModule, MatTableModule} from '@angular/material';
 
 
-
-let components = [MatButtonModule , MatCheckboxModule , MatFormFieldModule , MatInputModule , MatIconModule , MatCardModule , MatGridListModule , MatTableModule , MatPaginatorModule  ];
+let components = [MatButtonModule, MatCheckboxModule, MatFormFieldModule
+  , MatInputModule, MatIconModule, MatCardModule, MatGridListModule,
+  MatTableModule, MatPaginatorModule, MatAutocompleteModule];
 
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule ,
+    CommonModule,
     ...components
   ]
-  , exports :[
+  , exports: [
     ...components
   ]
 })
-export class MaterialComponentsModule { }
+export class MaterialComponentsModule {
+}

@@ -1,15 +1,15 @@
 
 
-@import "../../../../../variables.scss";
+@import "../../../../../theme.scss";
 
 label , span{
   text-align: right !important;
 }
 input{
   text-align: right;
-  color:$accent;
+  color:get-color($mat-24count );
 }
 .mat-form-field-underline{
-  background-color: rgba($accent,.42) !important;
+  background-color: get-color($mat-24count , $default , .42) !important;
   display: none ;
 }

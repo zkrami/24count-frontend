@@ -1,8 +1,8 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppRoutingModule } from 'app-routing.module';
-import { AppComponent } from 'app.component';
+import {AppRoutingModule} from 'app-routing.module';
+import {AppComponent} from 'app.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {RequestInterceptor} from 'interceptors/request-interceptor.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -15,9 +15,9 @@ import {ToastrModule} from 'ngx-toastr';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule ,
+    HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({positionClass: 'toast-bottom-left'}),
     DashboardModule,
     AppRoutingModule,
   ],
@@ -26,8 +26,9 @@ import {ToastrModule} from 'ngx-toastr';
       provide: HTTP_INTERCEPTORS,
       useClass: RequestInterceptor,
       multi: true
-    } 
+    }
   ],
-  bootstrap: [AppComponent] ,
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {
+}

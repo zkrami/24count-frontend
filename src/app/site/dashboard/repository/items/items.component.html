@@ -1,13 +1,14 @@
 <br/>
 <div class="row" dir="rtl">
-  <mat-form-field color="accent">
-    <input matInput   #filter (keyup)="applyFilter($event.target.value)" (keydown)="filterKeyDown($event.code)" placeholder="فلتر" autofocus>
+  <mat-form-field color="color">
+    <input matInput #filter (keyup)="applyFilter($event.target.value)" (keydown)="filterKeyDown($event.code)"
+           placeholder="فلتر" autofocus>
   </mat-form-field>
 </div>
 
-<app-item-details *ngIf="selectedItem.wrapped" [item]="selectedItem.wrapped"></app-item-details>
-<app-item-details-input #itemInput *ngIf="selectedItem.wrapped" [item]="selectedItem.wrapped" (enterPressed)="inputEnterPress()" ></app-item-details-input>
-
+<app-item-details *ngIf="selectedItem" [item]="selectedItem"></app-item-details>
+<app-item-details-input *ngIf="selectedItem" [item]="selectedItem"
+                        (enterPressed)="inputEnterPress()"></app-item-details-input>
 
 
 <div class="row" dir="rtl">
@@ -16,77 +17,77 @@
 
       <!-- Name Column -->
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef dir="rtl"> الاسم </th>
-        <td mat-cell *matCellDef="let row" dir="rtl" > {{row.wrapped.item.name}} </td>
+        <th mat-header-cell *matHeaderCellDef dir="rtl"> الاسم</th>
+        <td mat-cell *matCellDef="let row" dir="rtl"> {{row.item.name}}</td>
       </ng-container>
 
 
       <!-- Code Column -->
       <ng-container matColumnDef="code">
         <th mat-header-cell *matHeaderCellDef> الرمز</th>
-        <td mat-cell *matCellDef="let row"> {{row.wrapped.item.code}} </td>
+        <td mat-cell *matCellDef="let row"> {{row.item.code}}</td>
       </ng-container>
 
 
       <!-- Shape Column -->
       <ng-container matColumnDef="shape">
         <th mat-header-cell *matHeaderCellDef> الشكل</th>
-        <td mat-cell *matCellDef="let row"> {{row.wrapped.item.shape}} </td>
+        <td mat-cell *matCellDef="let row"> {{row.item.shape}}</td>
       </ng-container>
 
 
       <!-- Identifier Column -->
       <ng-container matColumnDef="identifier">
         <th mat-header-cell *matHeaderCellDef> المعرف</th>
-        <td mat-cell *matCellDef="let row"> {{row.wrapped.item.identifier}} </td>
+        <td mat-cell *matCellDef="let row"> {{row.item.identifier}}</td>
       </ng-container>
 
       <!-- size Column -->
       <ng-container matColumnDef="size">
         <th mat-header-cell *matHeaderCellDef> الشكل</th>
-        <td mat-cell *matCellDef="let row"> {{row.wrapped.item.size}} </td>
+        <td mat-cell *matCellDef="let row"> {{row.item.size}}</td>
       </ng-container>
 
       <!-- factory Column -->
       <ng-container matColumnDef="factory">
         <th mat-header-cell *matHeaderCellDef> المصنع</th>
-        <td mat-cell *matCellDef="let row"> {{row.wrapped.item.factory}} </td>
+        <td mat-cell *matCellDef="let row"> {{row.item.factory}}</td>
       </ng-container>
 
       <!-- count Column -->
       <ng-container matColumnDef="count">
         <th mat-header-cell *matHeaderCellDef> العدد</th>
-        <td mat-cell *matCellDef="let row"> {{row.wrapped.count}} </td>
+        <td mat-cell *matCellDef="let row"> {{row.count}}</td>
       </ng-container>
 
       <!-- expiration Column -->
       <ng-container matColumnDef="expiration">
         <th mat-header-cell *matHeaderCellDef> انتهاء الصلاحية</th>
-        <td mat-cell *matCellDef="let row"> {{row.wrapped.expiration}} </td>
+        <td mat-cell *matCellDef="let row"> {{row.expiration}}</td>
       </ng-container>
 
       <!-- discount Column -->
       <ng-container matColumnDef="discount">
         <th mat-header-cell *matHeaderCellDef> الحسم</th>
-        <td mat-cell *matCellDef="let row"> {{row.wrapped.discount}} </td>
+        <td mat-cell *matCellDef="let row"> {{row.discount}}</td>
       </ng-container>
 
       <!-- bonus Column -->
       <ng-container matColumnDef="bonus">
         <th mat-header-cell *matHeaderCellDef> البونص</th>
-        <td mat-cell *matCellDef="let row"> {{row.wrapped.bonus}} </td>
+        <td mat-cell *matCellDef="let row"> {{row.bonus}}</td>
       </ng-container>
 
       <!-- net Column -->
       <ng-container matColumnDef="net">
         <th mat-header-cell *matHeaderCellDef> نت</th>
-        <td mat-cell *matCellDef="let row"> {{row.wrapped.net}} </td>
+        <td mat-cell *matCellDef="let row"> {{row.net}}</td>
       </ng-container>
 
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr  class="text-right" mat-row *matRowDef="let row; columns: displayedColumns;" (click)="rowClick(row)"
-          [class.selected-row]="selectedItem === row" [class.error-row]="row.error">
+      <tr class="text-right" mat-row *matRowDef="let row; columns: displayedColumns;" (click)="rowClick(row)"
+          [class.selected-row]="selectedItem === row" [class.error-row]="row.rowState.error">
       </tr>
     </table>
 

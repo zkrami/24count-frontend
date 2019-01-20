@@ -32,7 +32,7 @@ export class AuthService {
   }
 
 
-  get LoggedIn () : boolean{
+  get loggedIn () : boolean{
     return this.user !== null;
   }
 

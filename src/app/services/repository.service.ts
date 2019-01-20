@@ -3,6 +3,7 @@ import {ApiHttpClient} from './api-http-client.service';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {RepositoryItem} from 'models/RepositoryItem';
+import {Repository} from 'models/repository';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,15 @@ import {RepositoryItem} from 'models/RepositoryItem';
 export class RepositoryService {
 
   constructor(private http: ApiHttpClient) {
+  }
+
+  get(): Observable<Repository[]> {
+    return this.http.get('/repositories').pipe(
+      map(
+        response => {
+          return response.data;
+        }
+      ));
   }
 
   items() : Observable<RepositoryItem[]> {
@@ -30,7 +40,7 @@ export class RepositoryService {
 
 
   update (item : RepositoryItem) : Observable<RepositoryItem>{
-    return this.http.put(`/repository/items/${item.item.id}` , item ).pipe( map( response  => {
+    return this.http.put(`/repository/items/${item.item.id}` , item.toRequest() ).pipe( map( response  => {
       // map response to RepositoryItem
         let e = response.data;
         let item =  new RepositoryItem();

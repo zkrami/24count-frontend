@@ -36,14 +36,21 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
 
+    if(this.authService.loggedIn)
+      this.navigate();
   }
 
+
+  navigate(){
+    this.router.navigate(['/dashboard']);
+
+  }
   async submit(e : Event  ) {
 
     try {
       let response = await this.authService.login(this.emailFormControl.value, this.passwordFormControl.value).toPromise();
       this.toastr.success("تم تسجيل الدخول بنجاح");
-      this.router.navigate(['/']);
+      this.navigate();
 
     } catch (e) {
 

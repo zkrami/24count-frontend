@@ -1,4 +1,4 @@
-@import "../../../../../variables.scss";
+@import "../../../../../theme.scss";
 tr{
   transition:all 0.2s;
   td{
@@ -7,11 +7,11 @@ tr{
 }
 
 .selected-row {
-  background: rgba($accent , 0.8);
+  background: get-color($mat-accent , map_get($accent , 'default') , 1);
   td {
     color: #fff;
   }
 }
 .error-row{
-  background: $danger;
+  background: get-color($mat-danger , map_get($danger , 'darker'));
 }

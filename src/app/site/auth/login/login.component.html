@@ -1,36 +1,45 @@
-<div class="login-wrapper full-width float-right"  >
-  <mat-card>
-    <form (submit)="submit($event)"  #form="ngForm" [formGroup]="loginForm" method="post" >
-      <div>
-        <mat-form-field class="full-width" color="accent">
-          <input type="email" matInput placeholder="البريد الالكتروني" [formControl]="emailFormControl" name="email" required email="true"/>
-          <mat-icon matSuffix color="accent">email</mat-icon>
-          <mat-hint class="mat-h5">بريدك الالكتروني</mat-hint>
-          <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-          الرجاء ادخال بريد الكتروني صالح
-          </mat-error>
-          <mat-error *ngIf="emailFormControl.hasError('required')">
-            البريد الالكتروني <strong> مطلوب  </strong>
-          </mat-error>
-        </mat-form-field>
-      </div>
-      <br/>
-      <div class="">
-        <mat-form-field class="full-width" color="accent">
-          <input type="password" [formControl]="passwordFormControl" matInput placeholder="كلمة المرور" name="password" required/>
-          <mat-hint class="mat-h5">كلمة المرور</mat-hint>
+<div class="row">
 
-          <mat-error *ngIf="passwordFormControl.hasError('required')">
-            كلمة المرور <strong> مطلوبة  </strong>
-          </mat-error>
-          <mat-icon matSuffix>password</mat-icon>
-        </mat-form-field>
-      </div>
-      <br/>
-      <div class="full-width">
-        <button class="full-width" mat-raised-button color="accent" [disabled]="!loginForm.valid">ارسال</button>
-      </div>
-    </form >
-  </mat-card>
+  <div class="col-lg-6 offset-lg-3 mt-5">
+    <div class="login-wrapper full-width float-right">
+      <mat-card>
+        <form (submit)="submit($event)" #form="ngForm" [formGroup]="loginForm" method="post">
+          <div>
+            <mat-form-field class="full-width"  color="primary">
+              <input type="email" matInput placeholder="البريد الالكتروني" [formControl]="emailFormControl" name="email"
+                     required email="true"/>
+              <mat-icon matSuffix color="primary">email</mat-icon>
+              <mat-hint class="mat-h5">بريدك الالكتروني</mat-hint>
+              <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                الرجاء ادخال بريد الكتروني صالح
+              </mat-error>
+              <mat-error *ngIf="emailFormControl.hasError('required')">
+                البريد الالكتروني <strong> مطلوب </strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <br/>
+          <div class="">
+            <mat-form-field class="full-width" color="primary">
+              <input type="password" [formControl]="passwordFormControl" matInput placeholder="كلمة المرور"
+                     name="password" required/>
+              <mat-hint class="mat-h5">كلمة المرور</mat-hint>
+
+              <mat-error *ngIf="passwordFormControl.hasError('required')">
+                كلمة المرور <strong> مطلوبة </strong>
+              </mat-error>
+              <mat-icon matSuffix>password</mat-icon>
+            </mat-form-field>
+          </div>
+          <br/>
+          <div class="full-width">
+            <button class="full-width" mat-raised-button color="primary" [disabled]="!loginForm.valid">ارسال</button>
+          </div>
+        </form>
+      </mat-card>
+
+    </div>
+
+  </div>
 
 </div>

@@ -8,11 +8,19 @@ import {ItemsComponent as RepositoryItemsComponent} from './repository/items/ite
 import {AuthGuard} from 'auth.guard';
 import {SharedModule} from 'core-modules/shared/shared.module';
 
+import {OrderModule} from 'site/dashboard/order/order.module';
+import {CreateComponent as OrderCreateComponent} from 'site/dashboard/order/create/create.component';
+import {ListComponent as OrdersListComponent} from 'site/dashboard/order/list/list.component';
+import {EditComponent as OrderEditComponent} from 'site/dashboard/order/edit/edit.component';
+
 
 let routes : Routes = [
   { path : 'dashboard' , component:DashboardComponent , canActivate : [AuthGuard],
     children :[
-      {path : 'repository/items' , component : RepositoryItemsComponent}
+      {path : 'repository/items' , component : RepositoryItemsComponent} ,
+      {path : 'orders/create' , component : OrderCreateComponent },
+      {path : 'orders/:id/edit' , component : OrderEditComponent},
+      {path : 'orders/' , component : OrdersListComponent},
     ]}
 ];
 
@@ -23,6 +31,7 @@ let routes : Routes = [
     LayoutModule,
     RepositoryModule,
     SharedModule,
+    OrderModule ,
     RouterModule.forChild(routes)
   ]
 })

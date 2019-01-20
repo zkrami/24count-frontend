@@ -1,0 +1,6 @@
+
+export interface IToRequest{
+  toRequest() ;
+}
+
+

@@ -1,13 +1,28 @@
 <div class="side-menu">
 
-  <div class="navbar-brand">
-
-  </div>
+  <div class="navbar-brand"></div>
 
   <ul class="list-group">
-
     <li>
-      <a routerLink="/"><mat-icon>dashboard</mat-icon> Dashboard  </a>
+      <a [routerLink]="'/'"><mat-icon>dashboard</mat-icon> Dashboard  </a>
     </li>
+    <li>
+      <a [routerLink]="'/dashboard/repository/items'"><mat-icon>healing</mat-icon> Items </a>
+    </li>
+    <li>
+      <a [routerLink]="'/dashboard/repositories'"><mat-icon>business</mat-icon> Repositories</a>
+    </li>
+    <li>
+      <a [routerLink]="'/dashboard/orders/create'"><mat-icon>add_circle_outline</mat-icon>Create Order</a>
+    </li>
+    <li>
+      <a [routerLink]="'/dashboard/orders/'"><mat-icon>assignment</mat-icon>My Orders</a>
+    </li>
+    <li>
+      <a [routerLink]="'/logout'"><mat-icon> exit_to_app</mat-icon>Logout</a>
+    </li>
+
+
+
   </ul>
 </div>

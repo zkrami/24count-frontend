@@ -1,9 +1,8 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {RepositoryService} from 'services/repository-items.service';
+import {RepositoryService} from 'services/repository.service';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {RepositoryItem} from 'models/RepositoryItem';
 import {ToastrService} from 'ngx-toastr';
-import {RepositoryItemWrapper} from 'models/RepositoryItemWrapper';
 import {ItemDetailsInputComponent} from 'site/dashboard/repository/item-details-input/item-details-input.component';
 
 @Component({
@@ -14,33 +13,34 @@ import {ItemDetailsInputComponent} from 'site/dashboard/repository/item-details-
 export class ItemsComponent implements OnInit {
 
   items: RepositoryItem[];
-  selectedItem: RepositoryItemWrapper = new RepositoryItemWrapper(RepositoryItem.init());
-  dataSource: MatTableDataSource<RepositoryItemWrapper>;
+  selectedItem: RepositoryItem = RepositoryItem.init();
+  dataSource: MatTableDataSource<RepositoryItem>;
   displayedColumns: string[] = ['name', 'code', 'shape', 'identifier', 'size', 'factory', 'count', 'expiration', 'discount', 'bonus', 'net'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('filter') filter: ElementRef;
-  @ViewChild("itemInput") itemInput: ItemDetailsInputComponent;
+  @ViewChild(ItemDetailsInputComponent) itemInput: ItemDetailsInputComponent;
 
   constructor(private itemsService: RepositoryService, private toastr: ToastrService) {
   }
 
   tableFilter(row, filter) {
 
-    return row.wrapped.item.name.includes(filter) || (row.wrapped.item.code == filter.trim());
+    return row.item.name.includes(filter) || (row.item.code == filter.trim());
   }
 
   async ngOnInit() {
 
 
     this.items = await this.itemsService.items().toPromise();
-    this.dataSource = new MatTableDataSource(this.items.map(it => new RepositoryItemWrapper(it)));
+    this.dataSource = new MatTableDataSource(this.items);
     this.dataSource.paginator = this.paginator;
     this.dataSource.filterPredicate = this.tableFilter;
   }
 
   filterFocus() {
     this.filter.nativeElement.focus();
+    this.filter.nativeElement.select();
   }
 
   filterEnterKeyDown() {
@@ -81,22 +81,23 @@ export class ItemsComponent implements OnInit {
   async inputEnterPress() {
     let item = this.selectedItem;
     this.filterFocus();
-    if (item.processing) {
+    if (item.rowState.processing) {
       return;
-    } // @todo notify user
+    } // @todo notify user ( can not proccess row at the time being updated)
     // mark item as being processed
-    item.processing = true;
+    item.rowState.processing = true;
+    item.rowState.error = false;
 
     try {
-      await this.itemsService.update(item.wrapped).toPromise();
-      this.toastr.success(`${item.wrapped.item.name} تم تحديثه بنجاح `);
+      await this.itemsService.update(item).toPromise();
+      this.toastr.success(`${item.item.name} تم تحديثه بنجاح `);
 
     } catch (e) {
-      this.toastr.error(` ${item.wrapped.item.name}  لم يتم تحديثه `);
-      item.error = true;
+      this.toastr.error(` ${item.item.name}  لم يتم تحديثه `);
+      item.rowState.error = true;
 
     } finally {
-      item.processing = false;
+      item.rowState.processing = false;
     }
   }
 

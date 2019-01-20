@@ -1,0 +1,176 @@
+
+$dark-primary-text: rgba(black, 0.87);
+$dark-secondary-text: rgba(black, 0.54);
+$dark-disabled-text: rgba(black, 0.38);
+$dark-dividers: rgba(black, 0.12);
+$dark-focused: rgba(black, 0.12);
+$light-primary-text: white;
+$light-secondary-text: rgba(white, 0.7);
+$light-disabled-text: rgba(white, 0.5);
+$light-dividers: rgba(white, 0.12);
+$light-focused: rgba(white, 0.12);
+$mat-24count: (
+  50: #ffeaec,
+  100: #ffcacc,
+  200: #ed9590,
+  300: #e26b65,
+  400: #e94a3e,
+  500: #ec381e,
+  600: #de2d1f,
+  700: #cc211a,
+  800: #c01813,
+  900: #b10303,
+  A100: #ffcacc,
+  A200: #ed9590,
+  A400: #e94a3e,
+  A700: #cc211a,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+$mat-gray: (
+  50: #eceff1,
+  100: #cfd8dc,
+  200: #b0bec5,
+  300: #90a4ae,
+  400: #78909c,
+  500: #607d8b,
+  600: #546e7a,
+  700: #455a64,
+  800: #37474f,
+  900: #263238,
+  A100: #cfd8dc,
+  A200: #b0bec5,
+  A400: #78909c,
+  A700: #455a64,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $dark-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+$mat-danger: (
+  50 : #f5e6e5,
+  100 : #e6c0be,
+  200 : #d69792,
+  300 : #c66d66,
+  400 : #b94d46,
+  500 : #ad2e25,
+  600 : #a62921,
+  700 : #9c231b,
+  800 : #931d16,
+  900 : #83120d,
+  A100 : #ffb6b4,
+  A200 : #ff8581,
+  A400 : #ff534e,
+  A700 : #ff3a35,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $dark-primary-text,
+    600: $dark-primary-text,
+    700: $dark-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $dark-primary-text,
+    A400: $dark-primary-text,
+    A700: black,
+  )
+);
+
+
+$mat-accent: (
+  50 : #f5e6e5,
+  100 : #e6c0be,
+  200 : #d69792,
+  300 : #c66d66,
+  400 : #b94d46,
+  500 : #ad2e25,
+  600 : #a62921,
+  700 : #9c231b,
+  800 : #931d16,
+  900 : #83120d,
+  A100 : #ffb6b4,
+  A200 : #ff8581,
+  A400 : #ff534e,
+  A700 : #ff3a35,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $light-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+
+$default:700;
+$lighter:600;
+$darker:800;
+
+$primary : (
+  'default' : 700 ,
+  'lighter' : 600 ,
+  'darker' : 800
+);
+
+$accent : (
+  'default' : 500 ,
+  'lighter' : 400 ,
+  'darker' : 600
+);
+
+$danger : (
+  'default' : 700 ,
+  'lighter' : 600 ,
+  'darker' : 800
+);
+
+
+
+@function get-contrast($palette, $hue) {
+  @return map-get(map-get($palette, contrast), $hue);
+}
+@function get-color($palette, $hue: $default, $opacity: 1) {
+  $color: map-get($palette, $hue);
+  $opacity: if($opacity == null, opacity($color), $opacity);
+  @return rgba($color, $opacity);
+}

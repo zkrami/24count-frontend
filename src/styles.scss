@@ -1,14 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "theme";
+@import '~@angular/material/theming';
+
+@include mat-core();
+$app-primary:mat-palette($mat-24count, map_get($primary , 'default' ), map_get($primary , 'lighter' ), map_get($primary , 'darker' ));
+$app-accent:mat-palette($mat-accent , map_get($accent , 'default' ), map_get($accent , 'lighter' ), map_get($accent , 'darker' ));
+$app-warn:mat-palette($mat-danger , map_get($danger , 'default' ), map_get($danger , 'lighter' ), map_get($danger , 'darker' ));
+$app-theme:mat-light-theme($app-primary, $app-accent, $app-warn);
+
+@include angular-material-theme($app-theme);
+
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
 
 
-html , body{
-   height: 100%; padding:0;
+html,body{
+   height:100%;
+  padding:0;
 }
 .row{
   margin:0;
-
 }
 .full-width{
   width:100%;
@@ -18,4 +28,21 @@ html , body{
 }
 .no-padding{
   padding:0;
+}
+.accent-background{
+  background: get-color($mat-24count , $default );
+}
+.accent-background-contrast{
+  background: get-contrast($mat-24count , $default);
+}
+.accent-color{
+  color:get-color($mat-24count , $default);
+}
+.accent-color-contrast{
+  color:get-contrast($mat-24count , $default);
+}
+
+
+#toast-container > div {
+  opacity:1;
 }
