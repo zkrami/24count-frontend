@@ -1,6 +1,6 @@
 
-<mat-form-field class="full-width">
-  <input #filter  autofocus type="text" [placeholder]="placeholder"
+<mat-form-field class="full-width" >
+  <input #filter  autofocus type="text" [disabled]="disabled" [placeholder]="placeholder"
          aria-label="Number" matInput [formControl]="filterControl" [matAutocomplete]="auto">
   <mat-autocomplete autoActiveFirstOption (optionSelected)="selectedItemChange($event.option.value)"
                     #auto="matAutocomplete" [displayWith]="itemDisplay">

@@ -22,10 +22,10 @@ export class AuthService {
       return this._user;
     }
     if (sessionStorage.getItem('user')) {
-      return this._user = JSON.parse(sessionStorage.getItem('user'));
+      return this._user = Object.assign( new User() ,  JSON.parse(sessionStorage.getItem('user')));
     }
     if (localStorage.getItem('user')) {
-      return this._user = JSON.parse(localStorage.getItem('user'));
+      return this._user = Object.assign( new User() ,  JSON.parse(localStorage.getItem('user')));
     }
 
     return null;
@@ -45,8 +45,12 @@ export class AuthService {
   }
   public logout() {
 
-    this.localLogout();
-    return this.http.get('/logout');
+
+    return this.http.get('/logout').pipe(finalize(
+      () => {
+        this.localLogout();
+      }
+    ));
   }
 
   public login(email: string, password: string, remember: boolean = true) : Observable<ApiResponse> {
@@ -83,7 +87,7 @@ export class AuthService {
 
 
     // update user
-    this._user = data ;
+    this._user = Object.assign(new User() ,  data) ;
     this._user.remember = remember ;
 
     if (remember)

@@ -15,17 +15,16 @@ export class ItemsFilterComponent implements OnInit {
   @ViewChild('filter') filter: ElementRef;
   @Output() itemChange = new EventEmitter<Item>();
   value: Item = null;
-  items: Item[];
+  @Input("items") items: Item[] = [];
   filterControl = new FormControl();
   filteredItems: Observable<Item[]>;
 
+  @Input("disabled") disabled : boolean = false;
   @Input("placeholder") placeholder : string ;
-  constructor(private itemsService: ItemsService) {
+  constructor() {
   }
 
-  async ngOnInit() {
-
-    this.items = await this.itemsService.get().toPromise();
+  ngOnInit() {
 
     this.filteredItems = this.filterControl.valueChanges.pipe(
       startWith(''),

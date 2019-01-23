@@ -1,28 +1,55 @@
-<div class="side-menu">
+<div class="side-menu mat-elevation-z5" [class.closed]="!menuOpen">
 
-  <div class="navbar-brand"></div>
+  <div class="full-width ">
+    <div class="row">
+      <div class="mt-3 mb-3 logo-wrapper">
+        <img src="assets/logo.png" class="full-width" alt="24count"/>
+      </div>
+    </div>
+  </div>
 
   <ul class="list-group">
     <li>
-      <a [routerLink]="'/'"><mat-icon>dashboard</mat-icon> Dashboard  </a>
+      <a [routerLink]="'/'"> <span> لوحة التحكم </span>
+        <mat-icon>dashboard</mat-icon>
+      </a>
+    </li>
+  </ul>
+  <ul class="list-group" *ngIf="auth.user && auth.user.repository()">
+
+    <li>
+      <a [routerLink]="'/dashboard/repository/items'"><span> المواد </span>
+        <mat-icon>healing</mat-icon>
+      </a>
     </li>
     <li>
-      <a [routerLink]="'/dashboard/repository/items'"><mat-icon>healing</mat-icon> Items </a>
-    </li>
-    <li>
-      <a [routerLink]="'/dashboard/repositories'"><mat-icon>business</mat-icon> Repositories</a>
-    </li>
-    <li>
-      <a [routerLink]="'/dashboard/orders/create'"><mat-icon>add_circle_outline</mat-icon>Create Order</a>
-    </li>
-    <li>
-      <a [routerLink]="'/dashboard/orders/'"><mat-icon>assignment</mat-icon>My Orders</a>
-    </li>
-    <li>
-      <a [routerLink]="'/logout'"><mat-icon> exit_to_app</mat-icon>Logout</a>
+      <a [routerLink]="'/dashboard/repository/orders/'"><span> الطلبيات </span>
+        <mat-icon>assignment</mat-icon>
+      </a>
     </li>
 
 
+  </ul>
 
+  <ul class="list-group" *ngIf="auth.user && auth.user.pharmacist()">
+    <li>
+      <a [routerLink]="'/dashboard/repositories'"><span> المستودعات </span>
+        <mat-icon>business</mat-icon>
+      </a>
+    </li>
+
+    <li>
+      <a [routerLink]="'/dashboard/pharmacy/orders/'"><span> الطلبيات </span>
+        <mat-icon>assignment</mat-icon>
+      </a>
+    </li>
+
+  </ul>
+  <ul class="list-group">
+    <li>
+      <a [routerLink]="'/logout'"><span> تسجيل الخروج </span>
+        <mat-icon>exit_to_app</mat-icon>
+      </a>
+    </li>
   </ul>
 </div>

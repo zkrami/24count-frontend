@@ -5,7 +5,7 @@ import {MatAutocompleteModule, MatButtonModule, MatCardModule, MatCheckboxModule
 
 let components = [MatButtonModule, MatCheckboxModule, MatFormFieldModule
   , MatInputModule, MatIconModule, MatCardModule, MatGridListModule,
-  MatTableModule, MatPaginatorModule, MatAutocompleteModule];
+  MatTableModule, MatPaginatorModule, MatAutocompleteModule ];
 
 @NgModule({
   declarations: [],

@@ -6,5 +6,13 @@ export class User{
   expires_in:number;
   permissions : string[];
   remember: boolean ;
+  role:string ;
+
+  pharmacist() : boolean{
+    return this.role == 'pharmacist';
+  }
+  repository() : boolean{
+    return this.role == 'repository';
+  }
 
 }

@@ -1,8 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Tajawal');
+
 @import "theme";
 @import '~@angular/material/theming';
+$app-font-family : '"Tajawal", sans-serif;';
+$custom-typography: mat-typography-config($font-family: $app-font-family);
 
-@include mat-core();
+@include mat-core($custom-typography);
 $app-primary:mat-palette($mat-24count, map_get($primary , 'default' ), map_get($primary , 'lighter' ), map_get($primary , 'darker' ));
 $app-accent:mat-palette($mat-accent , map_get($accent , 'default' ), map_get($accent , 'lighter' ), map_get($accent , 'darker' ));
 $app-warn:mat-palette($mat-danger , map_get($danger , 'default' ), map_get($danger , 'lighter' ), map_get($danger , 'darker' ));
@@ -10,12 +14,14 @@ $app-theme:mat-light-theme($app-primary, $app-accent, $app-warn);
 
 @include angular-material-theme($app-theme);
 
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+//@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
 
 
 html,body{
    height:100%;
   padding:0;
+  font-family: 'Tajawal', sans-serif;
+
 }
 .row{
   margin:0;
@@ -46,3 +52,27 @@ html,body{
 #toast-container > div {
   opacity:1;
 }
+
+
+.button-wrapper{
+  align-items: center;
+  flex-direction: row;
+  display: flex;
+}
+.checkbox-wrapper{
+  align-items: center;
+  flex-direction: row;
+  display: flex;
+}
+
+
+.toast-warning{
+  background-color: get-color($mat-danger);
+}
+.toast-error {
+  background-color: get-color($mat-24count);
+}
+.toast-success{
+  background-color: get-color($mat-accent);
+}
+

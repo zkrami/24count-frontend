@@ -1,3 +1,5 @@
+$layout:#222D32;
+$layout-border:#546e7a;
 
 $dark-primary-text: rgba(black, 0.87);
 $dark-secondary-text: rgba(black, 0.54);
@@ -75,20 +77,20 @@ $mat-gray: (
 );
 
 $mat-danger: (
-  50 : #f5e6e5,
-  100 : #e6c0be,
-  200 : #d69792,
-  300 : #c66d66,
-  400 : #b94d46,
-  500 : #ad2e25,
-  600 : #a62921,
-  700 : #9c231b,
-  800 : #931d16,
-  900 : #83120d,
-  A100 : #ffb6b4,
-  A200 : #ff8581,
-  A400 : #ff534e,
-  A700 : #ff3a35,
+  50 : #fff8e1,
+  100 : #ffecb5,
+  200 : #ffe083,
+  300 : #ffd451,
+  400 : #ffca2c,
+  500 : #ffc107,
+  600 : #ffbb06,
+  700 : #ffb305,
+  800 : #ffab04,
+  900 : #ff9e02,
+  A100 : #ffffff,
+  A200 : #fffaf2,
+  A400 : #ffe4bf,
+  A700 : #ffd9a6,
   contrast: (
     50: $dark-primary-text,
     100: $dark-primary-text,
@@ -111,20 +113,20 @@ $mat-danger: (
 
 
 $mat-accent: (
-  50 : #f5e6e5,
-  100 : #e6c0be,
-  200 : #d69792,
-  300 : #c66d66,
-  400 : #b94d46,
-  500 : #ad2e25,
-  600 : #a62921,
-  700 : #9c231b,
-  800 : #931d16,
-  900 : #83120d,
-  A100 : #ffb6b4,
-  A200 : #ff8581,
-  A400 : #ff534e,
-  A700 : #ff3a35,
+  50 : #e1f6ee,
+  100 : #b3e9d5,
+  200 : #81daba,
+  300 : #4ecb9e,
+  400 : #28c089,
+  500 : #02b574,
+  600 : #02ae6c,
+  700 : #01a561,
+  800 : #019d57,
+  900 : #018d44,
+  A100 : #b9ffd6,
+  A200 : #86ffb7,
+  A400 : #53ff99,
+  A700 : #3aff8a,
   contrast: (
     50: $dark-primary-text,
     100: $dark-primary-text,
@@ -142,6 +144,7 @@ $mat-accent: (
     A700: $light-primary-text,
   )
 );
+
 
 
 $default:700;

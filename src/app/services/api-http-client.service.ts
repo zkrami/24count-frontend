@@ -48,6 +48,24 @@ export class ApiHttpClient {
 
   }
 
+
+  public delete(url: string) : Observable<ApiResponse> {
+    return this.http.delete(this.apiEndPoint +  url, {observe : 'response'}).pipe(
+      map (response => {
+        let apiResponse = new ApiResponse();
+        apiResponse.status = response.status;
+        apiResponse.data = response.body ;
+
+        return apiResponse;
+      }),
+      catchError( err => {
+        this.appConfig.httpError(url , err);
+        return throwError(err);
+      }));
+
+  }
+
+
   public get(url: string) : Observable<ApiResponse> {
     return this.http.get(this.apiEndPoint +  url, {observe : 'response'}).pipe(
       map (response => {

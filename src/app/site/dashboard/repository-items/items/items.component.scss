@@ -11,7 +11,12 @@ tr{
   td {
     color: #fff;
   }
+  mat-icon{
+    color:#fff;
+  }
 }
 .error-row{
   background: get-color($mat-danger , map_get($danger , 'darker'));
 }
+
+

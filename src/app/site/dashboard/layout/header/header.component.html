@@ -1,12 +1,13 @@
-<header class="navbar px-4 flex-column flex-md-row">
-  <a aria-label="NG Bootstrap" class="navbar-brand mr-2 mr-md-0" routerlink="/" href="#/">
-
-    <span class="ml-2  d-inline">ng-bootstrap</span>
-  </a>
-  <div class="navbar-nav-scroll">
+<header class="navbar flex-row app-header mat-elevation-z5">
+  <div class="d-flex align-items-center">
     <ul class="navbar-nav flex-row align-items-center">
-      <li class="nav-item"><a class="nav-link" href="#/getting-started">Getting Started</a></li>
-      <li class="nav-item active ml-1"><a class="nav-link" href="#/components">Components</a></li>
+      <li class="nav-item d-flex ml-3"><mat-icon >shopping_cart</mat-icon></li>
+      <li class="nav-item d-flex ml-3"><mat-icon >notifications</mat-icon></li>
+    </ul>
+  </div>
+  <div class="">
+    <ul class="navbar-nav flex-row align-items-center">
+      <li class="nav-item d-flex" (click)="menuClick()"><mat-icon >menu</mat-icon></li>
     </ul>
   </div>
 

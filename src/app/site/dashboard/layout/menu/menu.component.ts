@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {LayoutService} from 'services/layout.service';
+import {AuthService} from 'services/auth.service';
+import {User} from 'models/user';
 
 @Component({
   selector: 'app-menu',
@@ -7,9 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(private layoutService : LayoutService , private auth : AuthService) { }
 
+  menuOpen : boolean = true ;
   ngOnInit() {
-  }
 
+    this.layoutService.menuTriggered.subscribe( menuOpen => {
+      this.menuOpen = menuOpen;
+    });
+  }
 }

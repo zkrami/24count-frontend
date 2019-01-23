@@ -5,13 +5,14 @@ import { ListComponent } from './list/list.component';
 import { DetailsComponent } from './details/details.component';
 import { EditComponent } from './edit/edit.component';
 import {SharedModule} from 'core-modules/shared/shared.module';
-import { RepositoryFilterComponent } from './repository-filter/repository-filter.component';
+import {UIModule} from 'site/dashboard/ui/ui.module';
 
 @NgModule({
-  declarations: [CreateComponent, ListComponent, DetailsComponent, EditComponent, RepositoryFilterComponent],
+  declarations: [CreateComponent, ListComponent, DetailsComponent, EditComponent],
   imports: [
     CommonModule ,
-    SharedModule
+    SharedModule ,
+    UIModule
   ]
 })
 export class PharmacyOrdersModule { }

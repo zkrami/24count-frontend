@@ -10,7 +10,7 @@ export class ItemDetailsInputComponent implements OnInit {
 
   @Input('item') repositoryItem: RepositoryItem;
   @Output('enterPressed') enterPressed = new EventEmitter<RepositoryItem>();
-  @ViewChild('countInput') countInput: ElementRef;
+  @ViewChild('expirationInput') expirationInput: ElementRef;
 
   constructor() {
   }
@@ -19,8 +19,8 @@ export class ItemDetailsInputComponent implements OnInit {
   }
   focus() {
 
-    this.countInput.nativeElement.focus();
-    this.countInput.nativeElement.select();
+    this.expirationInput.nativeElement.focus();
+    this.expirationInput.nativeElement.select();
 
 
   }

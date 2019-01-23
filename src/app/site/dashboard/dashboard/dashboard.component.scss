@@ -1,0 +1,12 @@
+.menu-wrapper.closed{
+  max-width: 50px;
+}
+
+
+.menu-wrapper{
+  transition-duration: .4s;
+  transition-timing-function: cubic-bezier(.25,.8,.25,1);
+  transition-property: background-color,visibility;
+  transition: max-width .4s;
+  max-width: 18vw;
+}

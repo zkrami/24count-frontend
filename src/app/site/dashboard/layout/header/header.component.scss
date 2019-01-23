@@ -1,0 +1,10 @@
+@import "../../../../../theme";
+.app-header{
+  background: $layout;
+  border-bottom:solid 1px lighten($layout , 10%);
+}
+
+.app-header mat-icon{
+  color:$light-secondary-text;
+  cursor: pointer;
+}

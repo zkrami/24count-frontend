@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {LayoutService} from 'services/layout.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private layoutService : LayoutService) { }
 
+  menuOpen : boolean ;
   ngOnInit() {
+    this.layoutService.menuTriggered.subscribe( menuOpen => {
+      this.menuOpen = menuOpen;
+    });
   }
 
 }

@@ -4,7 +4,7 @@
     <div class="login-wrapper full-width float-right">
       <mat-card>
         <form (submit)="submit($event)" #form="ngForm" [formGroup]="loginForm" method="post">
-          <div>
+          <div class="text-right" dir="rtl">
             <mat-form-field class="full-width"  color="primary">
               <input type="email" matInput placeholder="البريد الالكتروني" [formControl]="emailFormControl" name="email"
                      required email="true"/>
@@ -19,7 +19,7 @@
             </mat-form-field>
           </div>
           <br/>
-          <div class="">
+          <div class="text-right" dir="rtl">
             <mat-form-field class="full-width" color="primary">
               <input type="password" [formControl]="passwordFormControl" matInput placeholder="كلمة المرور"
                      name="password" required/>
