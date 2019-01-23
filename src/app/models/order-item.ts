@@ -7,10 +7,11 @@ export class OrderItem implements IToRequest{
   item_id: number;
   order_id: number;
   count: number;
+  response_count : number ;
   item: Item;
 
   toRequest(){
-    return {id: this.id , item_id : this.item_id , order_id : this.order_id  , count : this.count}
+    return {id: this.id , item_id : this.item_id , order_id : this.order_id  , count : this.count , response_count : this.response_count}
   }
 
   constructor(params: Partial<OrderItem> = {}) {

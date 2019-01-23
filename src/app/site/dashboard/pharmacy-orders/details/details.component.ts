@@ -8,6 +8,7 @@ import {ItemsFilterComponent} from 'site/dashboard/ui/items-filter/items-filter.
 import {PharmacyOrdersService} from 'services/pharmacy-orders.service';
 import {ToastrService} from 'ngx-toastr';
 import {RepositoryService} from 'services/repository.service';
+import {Repository} from 'models/repository';
 
 @Component({
   selector: 'app-pharamcy-order-details',
@@ -33,6 +34,8 @@ export class DetailsComponent implements OnInit {
   selectedItem: Item = null;
   @ViewChild(ItemsFilterComponent) itemsFilter: ItemsFilterComponent;
   items: Item[] = null;
+  repository: Repository = null;
+  private disabled = false;
 
   constructor(private orderService: PharmacyOrdersService, private toastr: ToastrService, private repositoryService: RepositoryService) {
   }
@@ -43,7 +46,8 @@ export class DetailsComponent implements OnInit {
 
   async ngOnInit() {
 
-    this.items = await this.repositoryService.repositoryItems(this.order.repository_id).toPromise();
+    this.repository = await this.repositoryService.getById(this.order.repository_id).toPromise();
+    this.items = this.repository.repositoryItems();
     // associate each OrderItem with Item form this.items
     this.order.items = this.order.items.map(oit => {
       return Object.assign(new OrderItem(), {item: this.items.find(it => it.id == oit.item_id)}, oit);
@@ -101,11 +105,12 @@ export class DetailsComponent implements OnInit {
     this.dataSource._updateChangeSubscription();
   }
 
-
   async save() {
 
 
-    if(this.disabled) return ;
+    if (this.disabled) {
+      return;
+    }
 
     this.disable();
 
@@ -113,7 +118,7 @@ export class DetailsComponent implements OnInit {
 
       let order = await this.orderService.update(this.order).toPromise();
       this.order.id = order.id;
-      this.toastr.success('لقد تم حفظ الفاتورة بنجاح' , '' , {timeOut:300000});
+      this.toastr.success('لقد تم حفظ الفاتورة بنجاح', '', {timeOut: 300000});
     } catch (e) {
       this.toastr.error('لقد حدث خطأ ما الرجاء المحاولة لاحقاً');
     } finally {
@@ -121,11 +126,12 @@ export class DetailsComponent implements OnInit {
     }
 
 
-
   }
 
   async confirm() {
-    if(this.disabled) return ;
+    if (this.disabled) {
+      return;
+    }
     this.disable();
     try {
       // update the order first
@@ -149,10 +155,9 @@ export class DetailsComponent implements OnInit {
     return this.order.state !== Order.State.Draft;
   }
 
-  private disabled = false;
   private disable() {
 
-    this.disabled = true ;
+    this.disabled = true;
     this.saveButton.disabled = true;
     this.itemsFilter.disable();
     this.countInput.disabled = true;

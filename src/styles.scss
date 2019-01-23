@@ -35,17 +35,44 @@ html,body{
 .no-padding{
   padding:0;
 }
-.accent-background{
+
+
+
+.line-height-0{
+  line-height: 0;
+}
+.primary-color{
+  color:get-color($mat-gray , $default);
+}
+
+
+.primary-background{
   background: get-color($mat-24count , $default );
 }
-.accent-background-contrast{
+.primary-background-contrast{
   background: get-contrast($mat-24count , $default);
 }
-.accent-color{
+.primary-color{
   color:get-color($mat-24count , $default);
 }
-.accent-color-contrast{
+.primary-color-contrast{
   color:get-contrast($mat-24count , $default);
+}
+
+.accent-background{
+  background: get-color($mat-accent , $default );
+}
+.accent-background-contrast{
+  background: get-contrast($mat-accent , $default);
+}
+.accent-color{
+  color:get-color($mat-accent , $default);
+}
+.accent-color-contrast{
+  color:get-contrast($mat-accent , $default);
+}
+.gray-color{
+  color:get-color($mat-gray , 600);
 }
 
 

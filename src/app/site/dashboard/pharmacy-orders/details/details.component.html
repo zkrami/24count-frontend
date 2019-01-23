@@ -1,4 +1,14 @@
 <br/>
+<div class="row" dir="rtl" *ngIf="repository">
+
+  <h2 class="mat-h2 full-width text-right primary-color" >
+    {{repository.name}}
+  </h2>
+  <h4 class="mat-h4 gray-color line-height-0">
+    {{repository.address}}
+  </h4>
+
+</div>
 <div class="row" dir="rtl" [hidden]="readonly()">
 
   <div class="col-lg-3" *ngIf="items">
@@ -9,7 +19,7 @@
     <mat-form-field color="primary" class="full-width">
       <input  #count [appMaxInt] [formControl]="countFormControl" (keydown)="countKeyDown($event.code)" tabindex="2" matInput
              type="number" max="1000000000" min="0" placeholder="العدد"
-             autofocus>
+             autofocus autocomplete="off">
     </mat-form-field>
   </div>
 

@@ -56,14 +56,14 @@ export class RepositoryService {
     }));
   }
 
-
+/*
   repositoryItems(repository_id): Observable<Item[]> {
     return this.getById(repository_id).pipe(map(
       repository => {
         return repository.items.map(it => it.item);
       }
     ));
-  }
+  }*/
 
   update(item: RepositoryItem): Observable<RepositoryItem> {
     return this.http.put(`/repository/items/${item.item.id}`, item.toRequest()).pipe(map(response => {

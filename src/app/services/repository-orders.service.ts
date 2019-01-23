@@ -27,4 +27,44 @@ export class RepositoryOrdersService {
       }
     ));
   }
+
+
+
+  /**
+   * update items response_count
+   * @param order
+   */
+  update(order: Order): Observable<Boolean> {
+    return this.http.put(`/repository/orders/${order.id}`, order.toRequest()).pipe(map(
+      response => {
+        return response.status == 200 ;
+      }
+    ));
+  }
+
+  /**
+   * reject order
+   * @param order
+   */
+  reject(order: Order): Observable<Boolean> {
+    return this.http.put(`/repository/orders/${order.id}/reject` , {}).pipe(map(
+      response => {
+        return response.status == 200 ;
+      }
+    ));
+  }
+
+
+  /**
+   * accept order
+   * @param order
+   */
+  accept(order: Order): Observable<Boolean> {
+    return this.http.put(`/repository/orders/${order.id}/accept` , {}).pipe(map(
+      response => {
+        return response.status == 200 ;
+      }
+    ));
+  }
+
 }

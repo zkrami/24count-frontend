@@ -17,6 +17,9 @@ import {RepositoryModule} from 'site/dashboard/repository/repository.module';
 import {DetailsComponent as RepositoryDetailsComponent} from 'site/dashboard/repository/details/details.component';
 import {RepositoryGuard} from 'guards/repository.guard';
 import {PharmacistGuard} from 'guards/pharmacist.guard';
+import {ListComponent as RepositoryOrdersListComponent } from 'site/dashboard/repository-orders/list/list.component';
+import {DetailsComponent as RepositoryOrderEditComponent} from 'site/dashboard/repository-orders/details/details.component';
+import {RepositoryOrdersModule} from 'site/dashboard/repository-orders/repository-orders.module';
 
 
 let routes: Routes = [
@@ -29,8 +32,8 @@ let routes: Routes = [
         path: '', canActivateChild: [RepositoryGuard], children: [
 
           {path: 'repository/items', component: RepositoryItemsComponent},
-          {path: 'repository/orders/:id/edit', component: OrderEditComponent},
-          {path: 'repository/orders', component: OrdersListComponent},
+          {path: 'repository/orders/:id/edit', component: RepositoryOrderEditComponent},
+          {path: 'repository/orders', component: RepositoryOrdersListComponent},
 
         ]
       },
@@ -58,6 +61,7 @@ let routes: Routes = [
     SharedModule,
     PharmacyOrdersModule,
     RepositoryModule,
+    RepositoryOrdersModule,
     RouterModule.forChild(routes)
   ]
 })

@@ -72,7 +72,7 @@ export class AuthService {
   public refreshToken(): Observable<string> {
    return this.http.post('/login/refresh' , []).pipe(
      tap (apiResponse => {
-        this.storeUser(apiResponse.data , this._user.remember);
+        this.updateToken(apiResponse.data , this._user.remember);
      }),
      map(
         apiResponse => {
@@ -83,8 +83,20 @@ export class AuthService {
     );
   }
 
-  private storeUser(data, remember: boolean) {
 
+  private updateToken(data, remember: boolean) {
+
+    // update user
+    this._user = Object.assign( this._user ,  data) ;
+    this._user.remember = remember ;
+
+    if (remember)
+      localStorage.setItem('user', JSON.stringify(this.user) );
+
+    sessionStorage.setItem('user', JSON.stringify(this.user) );
+
+  }
+  private storeUser(data, remember: boolean) {
 
     // update user
     this._user = Object.assign(new User() ,  data) ;

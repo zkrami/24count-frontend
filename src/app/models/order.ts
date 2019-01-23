@@ -1,6 +1,7 @@
 import {OrderItem} from 'models/order-item';
 import {IToRequest} from 'models/to-request';
 import {RowState} from 'models/row-state';
+import {Pharmacy} from 'models/pharmacy';
 
 enum OrderState  {
 
@@ -19,6 +20,7 @@ export class Order implements IToRequest{
   id: number;
   repository_id: number;
   pharmacy_id: number;
+  pharmacy:Pharmacy ;
   send_at: Date;
   state: OrderState = OrderState.Draft;
   created_at : Date;
