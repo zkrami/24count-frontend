@@ -1,0 +1,38 @@
+@import "../../../../../theme";
+.notification-wrapper{
+  padding:10px;
+  border-bottom: 1px solid rgba(#fff,.8);
+  cursor: pointer;
+}
+
+mat-icon{
+  position: relative;
+  width:auto;
+  height:auto;
+  font-size:1.2rem;
+  float:right;
+  margin-left:3px;
+  text-align: right;
+}
+
+.danger{
+  background: get-color($mat-24count );
+  &.new{
+
+  }
+}
+.success{
+  background: get-color($mat-accent);
+  &.new{
+
+  }
+}
+.date{
+  clear: both;
+  width: 100%;
+  text-align: right;
+  display: block;
+  color: darken(#fff , 12%);
+
+}
+

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {LayoutService} from 'services/layout.service';
+import {NotificationService} from 'services/notification.service';
+import {Notification} from 'models/notification';
 
 @Component({
   selector: 'app-header',
@@ -8,17 +10,35 @@ import {LayoutService} from 'services/layout.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private layoutService : LayoutService) { }
+  constructor(private layoutService : LayoutService , private notificationService : NotificationService) { }
 
   menuOpen : boolean = true ;
-  ngOnInit() {
+  notifications:Notification[] =[];
+  unreadCount:number = 0 ;
+  async ngOnInit() {
 
-    this.layoutService.menuTriggered.subscribe( menuOpen => {
-        this.menuOpen = menuOpen;
+    this.layoutService.menuTriggered.subscribe(menuOpen => {
+      this.menuOpen = menuOpen;
     });
+    this.notifications = await this.notificationService.get().toPromise();
+    this.unreadCount = this.countUnRead();
+  }
+  countUnRead() : number{
+    return this.notifications.map( el => el.isRead()  ?  0 as number : 1 as number  ).reduce( (total , el ) =>  (total + el) );
   }
   menuClick(){
     this.layoutService.triggerMenu();
   }
+
+  notificationOpen : boolean =  false;
+
+  toggleNotification(){
+    if(this.unreadCount){
+      this.unreadCount = 0 ;
+      this.notificationService.markRead().subscribe();
+    }
+    this.notificationOpen = !this.notificationOpen;
+  }
+
 
 }

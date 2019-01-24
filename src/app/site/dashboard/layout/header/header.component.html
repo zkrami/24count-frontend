@@ -2,7 +2,17 @@
   <div class="d-flex align-items-center">
     <ul class="navbar-nav flex-row align-items-center">
       <li class="nav-item d-flex ml-3"><mat-icon >shopping_cart</mat-icon></li>
-      <li class="nav-item d-flex ml-3"><mat-icon >notifications</mat-icon></li>
+      <li class="nav-item d-flex ml-3" (click)="toggleNotification()">
+        <mat-icon  [class.active]="unreadCount != 0" >notifications</mat-icon>
+        <ul class="notification-list mat-elevation-z7" [class.open]="notificationOpen">
+
+          <li *ngFor="let notification of notifications">
+            <app-notification  [notification]="notification"></app-notification>
+          </li>
+
+        </ul>
+        <span class="unread-count" *ngIf="unreadCount != 0">{{unreadCount}}</span>
+      </li>
     </ul>
   </div>
   <div class="">
