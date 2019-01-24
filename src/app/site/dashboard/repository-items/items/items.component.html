@@ -22,10 +22,14 @@
 
 </div>
 
-<app-item-details *ngIf="selectedItem" [item]="selectedItem"></app-item-details>
-<app-item-details-input *ngIf="selectedItem" [item]="selectedItem"
-                        (enterPressed)="inputEnterPress()"></app-item-details-input>
+<div class="row">
+  <app-item-details *ngIf="selectedItem" [item]="selectedItem"></app-item-details>
 
+</div>
+<div class="row">
+  <app-item-details-input *ngIf="selectedItem" [item]="selectedItem" (enterPressed)="inputEnterPress()"></app-item-details-input>
+
+</div>
 
 <div class="row" dir="rtl">
   <div class="mat-elevation-z3 full-width">

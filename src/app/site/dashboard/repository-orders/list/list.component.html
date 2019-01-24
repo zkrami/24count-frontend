@@ -2,8 +2,8 @@
 <div class="row mt-5">
 
 
-  <div class="mat-elevation-z3 full-width">
-    <table mat-table [dataSource]="dataSource" class="full-width " matSort>
+  <div class="mat-elevation-z3 full-width text-right" dir="rtl">
+    <table mat-table [dataSource]="dataSource" class="full-width text-right" matSort >
 
       <!-- ID Column -->
       <ng-container matColumnDef="id">
@@ -33,8 +33,9 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
         <td mat-cell *matCellDef="let row">
 
-          <a [routerLink]="row.id + '/edit' " ><mat-icon color="primary">edit</mat-icon></a>
-          <mat-icon color="primary" (click)="reject(row)">cancel</mat-icon>
+          <a [routerLink]="row.id + '/edit' " *ngIf="row.state == 'waiting' " ><mat-icon color="accent">edit</mat-icon></a>
+          <a [routerLink]="row.id + '/edit' " *ngIf="row.state != 'waiting' " ><mat-icon color="accent">info</mat-icon></a>
+          <mat-icon *ngIf="row.state == 'waiting' "  color="warn" (click)="reject(row)">cancel</mat-icon>
 
 
         </td>

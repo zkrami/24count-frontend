@@ -32,7 +32,7 @@ export class ApiHttpClient {
       }));
 
   }
-  public put(url: string, body: any | null) : Observable<ApiResponse> {
+  public put(url: string, body: any | null = {} ) : Observable<ApiResponse> {
 
     return this.http.put(this.apiEndPoint +  url, body  , {observe : 'response'}).pipe(
       map (response => {

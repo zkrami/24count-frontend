@@ -9,19 +9,20 @@
   </h4>
 
 </div>
+<br/>
+
 <div class="row" dir="rtl" [hidden]="readonly()">
 
   <div class="col-lg-2 button-wrapper">
-    <button #saveButton class="full-width" mat-button mat-flat-button color="primary" (click)="save($event)">حفظ
-    </button>
+    <button #saveButton class="full-width" mat-button mat-flat-button color="primary" (click)="save($event)">حفظ</button>
   </div>
   <div class="col-lg-2 button-wrapper">
-    <button class="full-width" mat-button mat-flat-button color="accent" (click)="accept()">قبول
-    </button>
+    <button #acceptButton class="full-width" mat-button mat-flat-button color="accent" (click)="accept()">قبول</button>
   </div>
 
 </div>
 
+<br/>
 <div class="row" dir="rtl">
   <div class="mat-elevation-z3 full-width">
     <table tabindex="3" mat-table [dataSource]="dataSource" class="full-width">
@@ -47,8 +48,21 @@
       </ng-container>
 
 
+      <ng-container matColumnDef="response_count">
+        <th mat-header-cell *matHeaderCellDef>العدد الفعلي</th>
+        <td mat-cell *matCellDef="let row">
+
+          <mat-form-field color="primary" class="">
+            <input [readonly]="readonly()" [(ngModel)]="row.response_count"  [appMaxInt]   matInput
+                    type="number" max="1000000000" min="0" placeholder=""
+                    autofocus autocomplete="off">
+          </mat-form-field>
+        </td>
+      </ng-container>
+
+
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr class="text-right" mat-row *matRowDef="let row; columns: displayedColumns;" (click)="rowClick(row)">
+      <tr class="text-right" mat-row *matRowDef="let row; columns: displayedColumns;" >
       </tr>
     </table>
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>

@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator, MatTableDataSource} from '@angular/material';
+import {MatButton, MatPaginator, MatTableDataSource} from '@angular/material';
 import {OrderItem} from 'models/order-item';
 import {Order} from 'models/order';
 import {ToastrService} from 'ngx-toastr';
@@ -17,13 +17,13 @@ export class DetailsComponent implements OnInit {
 
 
   dataSource: MatTableDataSource<OrderItem>;
-  displayedColumns: string[] = ['name', 'code', 'count'];
+  displayedColumns: string[] = ['name', 'code', 'count', 'response_count'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
-
   order: Order = null;
   pharmacy: Pharmacy = null;
   disabled: boolean = false;
+  @ViewChild('saveButton') saveButton: MatButton;
+  @ViewChild('acceptButton') acceptButton: MatButton;
 
   constructor(private orderService: RepositoryOrdersService, private toastr: ToastrService, private router: ActivatedRoute) {
   }
@@ -41,7 +41,6 @@ export class DetailsComponent implements OnInit {
         this.order = order;
         this.pharmacy = this.order.pharmacy;
         this.dataSource = new MatTableDataSource(this.order.items);
-        console.log(this.order);
         this.dataSource.paginator = this.paginator;
         this.dataSource.filterPredicate = this.tableFilter;
       }
@@ -54,25 +53,65 @@ export class DetailsComponent implements OnInit {
     this.dataSource._updateChangeSubscription();
   }
 
-  async save() {
+  disable() {
+    this.disabled = true;
+    this.saveButton.disabled = true;
+    this.acceptButton.disabled = true;
+  }
 
+  enable() {
+    this.disabled = false;
+    this.saveButton.disabled = false;
+    this.acceptButton.disabled = false;
+  }
+
+  async save() {
 
     if (this.disabled) {
       return;
     }
-
+    this.disable();
+    try {
+      if(await this.orderService.update(this.order).toPromise()){
+        this.toastr.success("تم التحديث بنجاح");
+      }else{
+        throw Error("couldn't update");
+      }
+    } catch (e) {
+      console.log(e);
+      this.toastr.error("لقد حدث خطأ ما");
+    } finally {
+      this.enable();
+    }
 
   }
 
   async accept() {
+
     if (this.disabled) {
       return;
     }
+    this.disable();
+    try {
 
+      if( await this.orderService.update(this.order).toPromise() && await this.orderService.accept(this.order).toPromise()){
+        this.toastr.success("تم قبول الطلب بنجاح");
+        this.order.state = Order.State.Accepted;
+      }else{
+        throw Error("couldn't update");
+      }
+    } catch (e) {
+      this.toastr.error("لقد حدث خطأ ما");
+    } finally {
+      this.enable();
+    }
 
   }
 
   readonly() {
+    if (!this.order) {
+      return true;
+    }
     return this.order.state !== Order.State.Waiting;
   }
 

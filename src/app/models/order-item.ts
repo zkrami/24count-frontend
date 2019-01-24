@@ -21,7 +21,8 @@ export class OrderItem implements IToRequest{
       item_id = null,
       order_id = null,
       count = null,
-      item = null
+      item = null ,
+      response_count = null
     } = params;
 
     this.id = id;
@@ -29,6 +30,7 @@ export class OrderItem implements IToRequest{
     this.order_id = order_id;
     this.count = count;
     this.item = item;
+    this.response_count = response_count;
 
 
   }

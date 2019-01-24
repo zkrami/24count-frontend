@@ -30,8 +30,24 @@ export class ListComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
+  async reject(order: Order) {
 
-  reject(order:Order){
+    if (order.rowState.processing) return false;
+    order.rowState.processing = true;
+    order.state = Order.State.Rejected;
+    try {
+      if (await this.repositoryOrdersService.reject(order).toPromise()) {
+          this.toastr.success("لقد تم معالجة طلبك بنجاح");
+      } else {
+        throw Error("couldn't reject");
+      }
+    }catch (e) {
+      this.toastr.error("لقد حدث خطأ ما");
+      order.state = Order.State.Waiting;
+    }finally {
+      order.rowState.processing = false;
+    }
+
 
   }
 

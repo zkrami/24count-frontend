@@ -8,8 +8,8 @@ enum OrderState  {
   Waiting = 'waiting',
   Draft = 'draft',
   Canceled = 'canceled',
-  Complete = 'complete',
-  Rejected = 'rejected'
+  Rejected = 'rejected' ,
+  Accepted = 'accepted'
 }
 
 export class Order implements IToRequest{

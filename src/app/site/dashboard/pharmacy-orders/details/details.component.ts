@@ -25,6 +25,7 @@ export class DetailsComponent implements OnInit {
 
   // fields to disable
   @ViewChild('saveButton') saveButton: MatButton;
+  @ViewChild('confirmButton') confirmButton: MatButton;
   @ViewChild('count') countInput: MatInput;
 
 
@@ -159,6 +160,7 @@ export class DetailsComponent implements OnInit {
 
     this.disabled = true;
     this.saveButton.disabled = true;
+    this.confirmButton.disabled = true;
     this.itemsFilter.disable();
     this.countInput.disabled = true;
   }
@@ -167,6 +169,8 @@ export class DetailsComponent implements OnInit {
 
     this.disabled = false;
     this.saveButton.disabled = false;
+    this.confirmButton.disabled = false
+    ;
     this.itemsFilter.enable();
     this.countInput.disabled = false;
 
