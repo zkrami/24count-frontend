@@ -8,6 +8,7 @@ label , span{
 input{
   text-align: right;
   color:get-color($mat-24count );
+  width: 100%;
 }
 .mat-form-field-underline{
   background-color: get-color($mat-24count , $default , .42) !important;

@@ -1,4 +1,4 @@
-<div class="row full-width" dir="rtl"  *ngIf="repositoryItem">
+<div class="row full-width text-right" dir="rtl"  *ngIf="repositoryItem" >
   <div class="col-lg-2">
     <mat-form-field  class="full-width" color="primary">
       <app-date-input #expirationInput  (keydown)="inputKeyDown($event.code)" name="expiration" placeholder="تاريخ الصلاحية"  [(ngModel)]="repositoryItem.expiration" > </app-date-input>
