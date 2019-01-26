@@ -33,5 +33,32 @@ export class Order implements IToRequest{
     items : this.items.map(it => it.toRequest())} ;
   }
 
+  get stateString(){
+
+    if(this.state == Order.State.Waiting)
+      return 'في وضع الانتظار';
+
+    if(this.state == Order.State.Accepted)
+      return 'تم القبول';
+
+    if(this.state == Order.State.Rejected)
+      return 'تم الرفض';
+
+    if(this.state == Order.State.Canceled)
+      return 'تم الالغاء';
+
+    if(this.state == Order.State.Draft)
+      return 'في وضع التعديل';
+
+    return '';
+
+
+
+
+
+
+
+  }
+
 
 }

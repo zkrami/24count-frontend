@@ -1,9 +1,10 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {Order} from 'models/order';
 import {PharmacyOrdersService} from 'services/pharmacy-orders.service';
 import {ToastrService} from 'ngx-toastr';
 import {RepositoryOrdersService} from 'services/repository-orders.service';
+import {ConfirmDialogComponent} from 'site/dashboard/ui/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-list',
@@ -19,7 +20,7 @@ export class ListComponent implements OnInit {
 
   orders: Order[];
 
-  constructor(private repositoryOrdersService: RepositoryOrdersService , private toastr : ToastrService) {
+  constructor(private repositoryOrdersService: RepositoryOrdersService , private toastr : ToastrService , private dialog:MatDialog) {
 
   }
 
@@ -30,14 +31,15 @@ export class ListComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-  async reject(order: Order) {
+
+  async rejectDialog(order : Order){
 
     if (order.rowState.processing) return false;
     order.rowState.processing = true;
     order.state = Order.State.Rejected;
     try {
       if (await this.repositoryOrdersService.reject(order).toPromise()) {
-          this.toastr.success("لقد تم معالجة طلبك بنجاح");
+        this.toastr.success("لقد تم معالجة طلبك بنجاح");
       } else {
         throw Error("couldn't reject");
       }
@@ -48,6 +50,22 @@ export class ListComponent implements OnInit {
       order.rowState.processing = false;
     }
 
+
+  }
+  reject(order: Order) {
+
+    if (order.rowState.processing) return;
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent , {
+      width:'350px' ,
+      data : {message : 'هل أنت متاكد من رفض الطلبية؟'}
+    });
+    dialogRef.afterClosed().subscribe(
+      res =>{
+        if(res)
+          this.rejectDialog(order);
+      }
+    );
 
   }
 

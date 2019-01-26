@@ -6,7 +6,7 @@ export class RepositoryItem implements IToRequest {
 
   public item: Item = new Item();
   public available: boolean;
-  public expiration: Date;
+  public expiration: string;
   public discount: number;
   public bonus: number;
   public bonus_each: number;

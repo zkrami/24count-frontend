@@ -9,6 +9,11 @@
   </h4>
 
 </div>
+<div class="row text-right" dir="rtl">
+  <h4 class="mat-h4 gray-color text-right">
+    <span class="primary-color">الحالة:</span> {{order.stateString}}
+  </h4>
+</div>
 <div class="row" dir="rtl" [hidden]="readonly()">
 
   <div class="col-lg-3" *ngIf="items">
@@ -56,6 +61,13 @@
       <ng-container matColumnDef="count">
         <th mat-header-cell *matHeaderCellDef> العدد</th>
         <td mat-cell *matCellDef="let row"> {{row.count}} </td>
+      </ng-container>
+
+
+      <!-- response_countColumn -->
+      <ng-container matColumnDef="response_count">
+        <th mat-header-cell *matHeaderCellDef> العدد الفعلي</th>
+        <td mat-cell *matCellDef="let row"> {{row.response_count}} </td>
       </ng-container>
 
 

@@ -1,26 +1,24 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {Order} from 'models/order';
 import {PharmacyOrdersService} from 'services/pharmacy-orders.service';
 import {ToastrService} from 'ngx-toastr';
+import {ConfirmDialogComponent} from 'site/dashboard/ui/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss'] ,
+  styleUrls: ['./list.component.scss'],
 
 })
 export class ListComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'created_at', 'repository', 'state' , 'actions'];
+  displayedColumns: string[] = ['id', 'created_at', 'repository', 'state', 'actions'];
   dataSource: MatTableDataSource<Order>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-
-
   orders: Order[];
-
-  constructor(private pharmacyOrdersService: PharmacyOrdersService , private toastr : ToastrService) {
+  constructor(private pharmacyOrdersService: PharmacyOrdersService, private toastr: ToastrService, private  dialog: MatDialog) {
 
   }
 
@@ -32,43 +30,90 @@ export class ListComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  async deleteOrder(order: Order) {
+  async deleteDialog(order: Order) {
 
-    if (order.rowState.processing) return;
+    if (order.rowState.processing) {
+      return;
+    }
     order.rowState.processing = true;
 
     try {
 
-      if(await this.pharmacyOrdersService.delete(order).toPromise()){
-        order.rowState.deleted = true ;
-        this.toastr.success("لقد تم حذف الطلبية بنجاح");
+      if (await this.pharmacyOrdersService.delete(order).toPromise()) {
+        order.rowState.deleted = true;
+        this.toastr.success('لقد تم حذف الطلبية بنجاح');
 
-      }else{
-        throw Error("Can't delete order");
+      } else {
+        throw Error('Can\'t delete order');
       }
     } catch (e) {
-      this.toastr.error("لقد حدث خطأ ما");
+      this.toastr.error('لقد حدث خطأ ما');
     } finally {
       order.rowState.processing = false;
     }
   }
-  async cancelOrder(order: Order) {
-    if (order.rowState.processing) return;
+
+  deleteOrder(order: Order) {
+
+    if (order.rowState.processing) {
+      return;
+    }
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {message: 'هل أنت متاكد من حذف الطلبية؟'}
+    });
+    dialogRef.afterClosed().subscribe(
+      res => {
+        if (res) {
+          this.deleteDialog(order);
+        }
+      }
+    );
+
+  }
+
+  async cancelDialog(order: Order) {
+    if (order.rowState.processing) {
+      return;
+    }
     order.rowState.processing = true;
 
     try {
 
       if (await this.pharmacyOrdersService.cancel(order).toPromise()) {
-        order.state = Order.State.Canceled ;
-        this.toastr.success("لقد تم الغاء الطلبية بنجاح");
+        order.state = Order.State.Canceled;
+        this.toastr.success('لقد تم الغاء الطلبية بنجاح');
       } else {
-        throw Error("Can't cancel order");
+        throw Error('Can\'t cancel order');
       }
     } catch (e) {
-      this.toastr.error("لقد حدث خطأ ما");
+      this.toastr.error('لقد حدث خطأ ما');
     } finally {
       order.rowState.processing = false;
     }
+
+  }
+
+  cancelOrder(order: Order) {
+
+
+    if (order.rowState.processing) {
+      return;
+    }
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {message: 'هل أنت متاكد من الغاء الطلبية؟'}
+    });
+    dialogRef.afterClosed().subscribe(
+      res => {
+        if (res) {
+          this.cancelDialog(order);
+        }
+      }
+    );
+
   }
 
 

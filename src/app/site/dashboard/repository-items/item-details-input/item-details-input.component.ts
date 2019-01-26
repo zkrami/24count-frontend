@@ -1,5 +1,6 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {RepositoryItem} from 'models/repository-item';
+import {DateFieldComponent} from 'site/dashboard/ui/date-field/date-field.component';
 
 @Component({
   selector: 'app-item-details-input',
@@ -10,7 +11,7 @@ export class ItemDetailsInputComponent implements OnInit {
 
   @Input('item') repositoryItem: RepositoryItem;
   @Output('enterPressed') enterPressed = new EventEmitter<RepositoryItem>();
-  @ViewChild('expirationInput') expirationInput: ElementRef;
+  @ViewChild('expirationInput') expirationInput : DateFieldComponent;
 
   constructor() {
   }
@@ -19,9 +20,7 @@ export class ItemDetailsInputComponent implements OnInit {
   }
   focus() {
 
-    this.expirationInput.nativeElement.focus();
-    this.expirationInput.nativeElement.select();
-
+    this.expirationInput.focus();
 
   }
 

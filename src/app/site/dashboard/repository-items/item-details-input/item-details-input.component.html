@@ -1,7 +1,7 @@
 <div class="row full-width" dir="rtl"  *ngIf="repositoryItem">
   <div class="col-lg-2">
     <mat-form-field  class="full-width" color="primary">
-      <input #expirationInput type="date" matInput (keydown)="inputKeyDown($event.code)" name="expiration" placeholder="تاريخ الصلاحية"  [(ngModel)]="repositoryItem.expiration"  />
+      <app-date-input #expirationInput  (keydown)="inputKeyDown($event.code)" name="expiration" placeholder="تاريخ الصلاحية"  [(ngModel)]="repositoryItem.expiration" > </app-date-input>
     </mat-form-field>
   </div>
   <div class="col-lg-2 checkbox-wrapper" >
@@ -12,16 +12,18 @@
       <input type="number" max="100" appMaxFloat="100" matInput (keydown)="inputKeyDown($event.code)" name="discount"    placeholder="الخصم" [(ngModel)]="repositoryItem.discount"  />
     </mat-form-field>
   </div>
+
   <div class="col-lg-1">
     <mat-form-field  class="full-width" color="primary">
-      <input type="number" [appMaxInt] max="1000000000" matInput (keydown)="inputKeyDown($event.code)" name="bonus"  placeholder="بونص" [(ngModel)]="repositoryItem.bonus"  />
+      <input  type="number" [appMaxInt] max="1000000000" matInput (keydown)="inputKeyDown($event.code)" name="bonus_each"  placeholder="لكل" [(ngModel)]="repositoryItem.bonus_each" #bonus_each  />
     </mat-form-field>
   </div>
   <div class="col-lg-1">
     <mat-form-field  class="full-width" color="primary">
-      <input  type="number" [appMaxInt] max="1000000000" matInput (keydown)="inputKeyDown($event.code)" name="bonus_each"  placeholder="لكل" [(ngModel)]="repositoryItem.bonus_each"  />
+      <input type="number" [appMaxInt] max="1000000000" matInput (keydown)="inputKeyDown($event.code)" name="bonus"  placeholder="بونص" [appLessThan]="bonus_each.value" [(ngModel)]="repositoryItem.bonus"  />
     </mat-form-field>
   </div>
+
   <div class="col-lg-2 button-wrapper">
     <button mat-button color="primary" mat-flat-button class="full-width" (click)="inputEnterPress()">حفظ</button>
   </div>

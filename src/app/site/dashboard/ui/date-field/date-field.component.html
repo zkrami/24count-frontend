@@ -1,0 +1,5 @@
+<div [formGroup]="parts" class="app-date-input-container">
+  <input #year (change)="change()" (keypress)="yearKeypress($event)"  class="exchange" name="year" formControlName="year" size="4">
+  <span class="spacer">/</span>
+  <input (change)="change()" class="area" name="month" (keypress)="monthKeypress($event)"  formControlName="month" size="2" >
+</div>

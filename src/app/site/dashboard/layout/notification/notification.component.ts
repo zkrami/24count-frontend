@@ -69,10 +69,10 @@ export class NotificationComponent implements OnInit {
 
     if (notification.data.pharmacy) {
       // repository notification
-      return `/dashboard/repository/orders/1/edit`;
+      return `/dashboard/repository/orders/${notification.data.order_id}/edit`;
     } else {
       // pharmacy notification
-      return `/dashboard/pharmacy/orders/1/edit`;
+      return `/dashboard/pharmacy/orders/${notification.data.order_id}/edit`;
     }
   }
 

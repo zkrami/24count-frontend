@@ -49,6 +49,7 @@ export class RepositoryService {
       return response.data.map((e) => {
         let item = new RepositoryItem();
         item = Object.assign(item, e.pivot);
+        //console.log(item.expiration);
         item.item = Object.assign(new Item(), e);
         return item;
       });

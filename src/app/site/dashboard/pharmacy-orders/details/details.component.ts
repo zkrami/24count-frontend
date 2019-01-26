@@ -57,6 +57,9 @@ export class DetailsComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.filterPredicate = this.tableFilter;
 
+    if(this.order.state == Order.State.Accepted)
+      this.displayedColumns.push('response_count');
+
   }
 
   countFocus() {

@@ -9,7 +9,11 @@
   </h4>
 
 </div>
-<br/>
+<div class="row text-right" dir="rtl" *ngIf="order">
+  <h4 class="mat-h4 gray-color text-right">
+     <span class="primary-color">الحالة:</span> {{order.stateString}}
+  </h4>
+</div>
 
 <div class="row" dir="rtl" [hidden]="readonly()">
 
@@ -53,7 +57,7 @@
         <td mat-cell *matCellDef="let row">
 
           <mat-form-field color="primary" class="">
-            <input [readonly]="readonly()" [(ngModel)]="row.response_count"  [appMaxInt]   matInput
+            <input [readonly]="readonly()" [(ngModel)]="row.response_count"  [appLessThan]="row.count"    matInput
                     type="number" max="1000000000" min="0" placeholder=""
                     autofocus autocomplete="off">
           </mat-form-field>

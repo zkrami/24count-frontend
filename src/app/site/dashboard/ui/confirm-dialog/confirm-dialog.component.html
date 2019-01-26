@@ -1,0 +1,14 @@
+<h1 mat-dialog-title class="text-right">تاكيد العملية</h1>
+<div mat-dialog-content class="text-right">
+  <p>{{data.message}}</p>
+</div>
+<div mat-dialog-actions class="full-width">
+  <div class="row full-width">
+    <div class="col-6">
+    <button mat-button mat-flat-button color="warn" class="full-width" [mat-dialog-close]="true" >نعم</button>
+    </div>
+    <div class="col-6">
+      <button mat-button mat-flat-button color="accent" class="full-width" [mat-dialog-close]="false" autofocus="true" >لا</button>
+    </div>
+  </div>
+</div>
