@@ -51,14 +51,14 @@ export class ItemsFilterComponent implements OnInit {
   }
 
   itemDisplay(item: Item): string {
-    return item ? item.name : null;
+    return item ? ( item.name + " - " + item.name_en ) : null;
   }
 
 
   _filter(value: string): Item[] {
 
     return this.items.filter(item => {
-      return item.name.includes(value) || value === item.code;
+      return item.name_en.toLowerCase().includes(value.toLowerCase()) || item.name.includes(value) || value === item.code ;
     });
   }
 

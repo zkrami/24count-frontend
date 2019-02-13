@@ -3,40 +3,38 @@
 
 
   <div class="mat-elevation-z3 full-width text-right" dir="rtl">
-    <table mat-table [dataSource]="dataSource" class="full-width text-right" matSort >
+    <table mat-table [dataSource]="dataSource" class="full-width text-right"  >
 
       <!-- ID Column -->
       <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID</th>
+        <th mat-header-cell *matHeaderCellDef > ID</th>
         <td mat-cell *matCellDef="let row" > {{row.id}} </td>
       </ng-container>
 
       <!-- Created_at Column -->
       <ng-container matColumnDef="created_at">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header > تاريخ الانشاء</th>
+        <th mat-header-cell *matHeaderCellDef  > تاريخ الانشاء</th>
         <td mat-cell *matCellDef="let row"> {{row.created_at}} </td>
       </ng-container>
 
       <!-- repository Column -->
       <ng-container matColumnDef="pharmacy">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> الصيدلية </th>
-        <td mat-cell *matCellDef="let row"> {{row.pharmacy_id}} </td>
+        <th mat-header-cell *matHeaderCellDef > الصيدلية </th>
+        <td mat-cell *matCellDef="let row"> {{row.pharmacy.name}} </td>
       </ng-container>
 
 
       <!-- state Column -->
       <ng-container matColumnDef="state">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> الحالة</th>
+        <th mat-header-cell *matHeaderCellDef > الحالة</th>
         <td mat-cell *matCellDef="let row"> {{row.stateString}} </td>
       </ng-container>
       <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+        <th mat-header-cell *matHeaderCellDef ></th>
         <td mat-cell *matCellDef="let row">
 
           <a [routerLink]="row.id + '/edit' " *ngIf="row.state == 'waiting' " ><mat-icon color="accent">edit</mat-icon></a>
-          <a [routerLink]="row.id + '/edit' " *ngIf="row.state != 'waiting' " ><mat-icon color="accent">info</mat-icon></a>
-          <mat-icon *ngIf="row.state == 'waiting' "  color="warn" (click)="reject(row)">cancel</mat-icon>
-
+          <a [routerLink]="row.id  + '/edit' " *ngIf="row.state != 'waiting' " ><mat-icon color="accent">info</mat-icon></a>
 
         </td>
 

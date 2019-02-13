@@ -45,8 +45,24 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['/dashboard']);
 
   }
+
+  disabled:boolean = false;
+  disable(){
+
+    this.disabled = true ;
+    this.emailFormControl.disable();
+    this.passwordFormControl.disable();
+  }
+  enable(){
+    this.disabled = false;
+    this.passwordFormControl.enable();
+    this.emailFormControl.enable();
+  }
   async submit(e : Event  ) {
 
+
+    if(this.disabled) return ;
+    this.disable();
     try {
       let response = await this.authService.login(this.emailFormControl.value, this.passwordFormControl.value).toPromise();
       this.toastr.success("تم تسجيل الدخول بنجاح");
@@ -55,6 +71,8 @@ export class LoginComponent implements OnInit {
     } catch (e) {
 
       this.toastr.error("اسم المستخدم او كلمة المرور غير صالحة");
+    }finally {
+      this.enable();
     }
   }
 }

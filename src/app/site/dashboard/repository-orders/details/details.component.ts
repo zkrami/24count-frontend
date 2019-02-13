@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatButton, MatPaginator, MatTableDataSource} from '@angular/material';
+import {MatButton, MatDialog, MatPaginator, MatTableDataSource} from '@angular/material';
 import {OrderItem} from 'models/order-item';
 import {Order} from 'models/order';
 import {ToastrService} from 'ngx-toastr';
@@ -7,6 +7,8 @@ import {RepositoryOrdersService} from 'services/repository-orders.service';
 import {ActivatedRoute} from '@angular/router';
 import {switchMap} from 'rxjs/operators';
 import {Pharmacy} from 'models/pharmacy';
+import {FormControl} from '@angular/forms';
+import {ConfirmDialogComponent} from 'site/dashboard/ui/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-details',
@@ -17,15 +19,16 @@ export class DetailsComponent implements OnInit {
 
 
   dataSource: MatTableDataSource<OrderItem>;
-  displayedColumns: string[] = ['name', 'code', 'count', 'response_count'];
+  displayedColumns: string[] = ['name' , 'name_en', 'code', 'count', 'response_count'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   order: Order = null;
   pharmacy: Pharmacy = null;
   disabled: boolean = false;
   @ViewChild('saveButton') saveButton: MatButton;
   @ViewChild('acceptButton') acceptButton: MatButton;
+  @ViewChild('rejectButton') rejectButton: MatButton;
 
-  constructor(private orderService: RepositoryOrdersService, private toastr: ToastrService, private router: ActivatedRoute) {
+  constructor(private orderService: RepositoryOrdersService, private toastr: ToastrService, private router: ActivatedRoute ,  private dialog:MatDialog) {
   }
 
   tableFilter(row, filter) {
@@ -43,6 +46,13 @@ export class DetailsComponent implements OnInit {
         this.dataSource = new MatTableDataSource(this.order.items);
         this.dataSource.paginator = this.paginator;
         this.dataSource.filterPredicate = this.tableFilter;
+
+
+        if(this.order.state == Order.State.Accepted)
+        {
+          this.displayedColumns.push('expiration');
+        }
+
       }
     );
 
@@ -57,12 +67,14 @@ export class DetailsComponent implements OnInit {
     this.disabled = true;
     this.saveButton.disabled = true;
     this.acceptButton.disabled = true;
+    this.rejectButton.disabled = true;
   }
 
   enable() {
     this.disabled = false;
     this.saveButton.disabled = false;
     this.acceptButton.disabled = false;
+    this.rejectButton.disabled = false;
   }
 
   async save() {
@@ -86,7 +98,7 @@ export class DetailsComponent implements OnInit {
 
   }
 
-  async accept() {
+  async acceptDialog() {
 
     if (this.disabled) {
       return;
@@ -107,6 +119,21 @@ export class DetailsComponent implements OnInit {
     }
 
   }
+  accept(){
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent , {
+      width:'350px' ,
+      data : {message : 'هل أنت متاكد من قبول الطلبية؟' , success : true}
+    });
+
+    dialogRef.afterClosed().subscribe(
+      res =>{
+        if(res)
+          this.acceptDialog();
+      }
+    );
+
+  }
 
   readonly() {
     if (!this.order) {
@@ -116,4 +143,57 @@ export class DetailsComponent implements OnInit {
   }
 
 
+
+  fileType = new FormControl();
+  async exportOrder() {
+    try {
+        await this.orderService.export(this.order , this.fileType.value).toPromise();
+    } catch (e) {
+        this.toastr.error("لقد حدث خطأ ما");
+    }
+  }
+
+
+  async rejectDialog(){
+
+
+    if (this.disabled) {
+      return;
+    }
+    this.disable();
+    let order = this.order;
+    order.rowState.processing = true;
+    order.state = Order.State.Rejected;
+    try {
+      if (await this.orderService.reject(order).toPromise()) {
+        this.toastr.success("لقد تم معالجة طلبك بنجاح");
+      } else {
+        throw Error("couldn't reject");
+      }
+    }catch (e) {
+      this.toastr.error("لقد حدث خطأ ما");
+      order.state = Order.State.Waiting;
+    }finally {
+      this.enable();
+    }
+
+
+  }
+  reject() {
+
+
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent , {
+      width:'350px' ,
+      data : {message : 'هل أنت متاكد من رفض الطلبية؟'}
+    });
+
+    dialogRef.afterClosed().subscribe(
+      res =>{
+        if(res)
+          this.rejectDialog();
+      }
+    );
+
+  }
 }

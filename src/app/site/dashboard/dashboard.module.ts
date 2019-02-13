@@ -20,13 +20,20 @@ import {PharmacistGuard} from 'guards/pharmacist.guard';
 import {ListComponent as RepositoryOrdersListComponent } from 'site/dashboard/repository-orders/list/list.component';
 import {DetailsComponent as RepositoryOrderEditComponent} from 'site/dashboard/repository-orders/details/details.component';
 import {RepositoryOrdersModule} from 'site/dashboard/repository-orders/repository-orders.module';
+import {ConfigComponent} from 'site/dashboard/config/config/config.component';
+import {ConfigModule} from 'site/dashboard/config/config.module';
 
 
 let routes: Routes = [
   {
     path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard],
     children: [
+      { //user
+        path:'' , canActivateChild :[AuthGuard] , children : [
 
+          {path:'config' ,   component : ConfigComponent}
+        ]
+      },
       {
         // repository
         path: '', canActivateChild: [RepositoryGuard], children: [
@@ -62,6 +69,7 @@ let routes: Routes = [
     PharmacyOrdersModule,
     RepositoryModule,
     RepositoryOrdersModule,
+    ConfigModule ,
     RouterModule.forChild(routes)
   ]
 })

@@ -1,17 +1,18 @@
 import {Injectable} from '@angular/core';
 import {ApiHttpClient} from './api-http-client.service';
 import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 import {RepositoryItem} from 'models/repository-item';
 import {Repository} from 'models/repository';
 import {Item} from 'models/item';
+import {HttpHeaders} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RepositoryService {
 
-  constructor(private http: ApiHttpClient) {
+  constructor(private http: ApiHttpClient ) {
   }
 
   get(): Observable<Repository[]> {
@@ -45,7 +46,6 @@ export class RepositoryService {
     return this.http.get('/repository/items').pipe(map(response => {
 
       // map response to RepositoryItem
-      // @todo measure time without map
       return response.data.map((e) => {
         let item = new RepositoryItem();
         item = Object.assign(item, e.pivot);
@@ -57,14 +57,6 @@ export class RepositoryService {
     }));
   }
 
-/*
-  repositoryItems(repository_id): Observable<Item[]> {
-    return this.getById(repository_id).pipe(map(
-      repository => {
-        return repository.items.map(it => it.item);
-      }
-    ));
-  }*/
 
   update(item: RepositoryItem): Observable<RepositoryItem> {
     return this.http.put(`/repository/items/${item.item.id}`, item.toRequest()).pipe(map(response => {
@@ -78,4 +70,24 @@ export class RepositoryService {
   }
 
 
+  import(file : File , type:string)  :  Observable<RepositoryItem[]>{
+
+
+    const formData = new FormData();
+    formData.append('data', JSON.stringify({
+      type:type
+    }));
+    formData.append('file', file);
+
+    return this.http.post("/repository/items" , formData).pipe(map( (response) => {
+      return response.data.map((e) => {
+        let item = new RepositoryItem();
+        item = Object.assign(item, e.pivot);
+        //console.log(item.expiration);
+        item.item = Object.assign(new Item(), e);
+        return item;
+      });
+    }));
+
+  }
 }

@@ -1,5 +1,5 @@
 import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
-import {MatButton, MatInput, MatPaginator, MatTableDataSource} from '@angular/material';
+import {MatButton, MatDialog, MatInput, MatPaginator, MatTableDataSource} from '@angular/material';
 import {OrderItem} from 'models/order-item';
 import {FormControl} from '@angular/forms';
 import {Order} from 'models/order';
@@ -9,6 +9,7 @@ import {PharmacyOrdersService} from 'services/pharmacy-orders.service';
 import {ToastrService} from 'ngx-toastr';
 import {RepositoryService} from 'services/repository.service';
 import {Repository} from 'models/repository';
+import {ConfirmDialogComponent} from 'site/dashboard/ui/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-pharamcy-order-details',
@@ -19,7 +20,7 @@ export class DetailsComponent implements OnInit {
 
 
   dataSource: MatTableDataSource<OrderItem>;
-  displayedColumns: string[] = ['name', 'code', 'count'];
+  displayedColumns: string[] = ['name' , 'name_en', 'code', 'count'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('count') count: ElementRef;
 
@@ -38,7 +39,7 @@ export class DetailsComponent implements OnInit {
   repository: Repository = null;
   private disabled = false;
 
-  constructor(private orderService: PharmacyOrdersService, private toastr: ToastrService, private repositoryService: RepositoryService) {
+  constructor(private orderService: PharmacyOrdersService, private toastr: ToastrService, private repositoryService: RepositoryService , private dialog : MatDialog) {
   }
 
   tableFilter(row, filter) {
@@ -58,7 +59,11 @@ export class DetailsComponent implements OnInit {
     this.dataSource.filterPredicate = this.tableFilter;
 
     if(this.order.state == Order.State.Accepted)
+    {
       this.displayedColumns.push('response_count');
+      this.displayedColumns.push('expiration');
+
+    }
 
   }
 
@@ -132,7 +137,7 @@ export class DetailsComponent implements OnInit {
 
   }
 
-  async confirm() {
+  async confirmDialog() {
     if (this.disabled) {
       return;
     }
@@ -152,6 +157,23 @@ export class DetailsComponent implements OnInit {
       this.toastr.error('لقد حدث خطأ ما الرجاء المحاولة لاحقاً');
       this.enable();
     }
+
+  }
+
+
+  confirm(){
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent , {
+      width:'350px' ,
+      data : {message : 'هل أنت متاكد من قبول الطلبية؟' , success : true}
+    });
+
+    dialogRef.afterClosed().subscribe(
+      res =>{
+        if(res)
+          this.confirmDialog();
+      }
+    );
 
   }
 
@@ -188,6 +210,14 @@ export class DetailsComponent implements OnInit {
       found.count = count;
     } else {
       this.order.items.push(new OrderItem({item_id: item.id, count: count, item: item}));
+    }
+  }
+  fileType = new FormControl();
+  async exportOrder() {
+    try {
+      await this.orderService.export(this.order , this.fileType.value).toPromise();
+    } catch (e) {
+      this.toastr.error("لقد حدث خطأ ما");
     }
   }
 

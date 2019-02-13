@@ -20,7 +20,7 @@
        <!-- repository Column -->
       <ng-container matColumnDef="repository">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> المستودع </th>
-        <td mat-cell *matCellDef="let row"> {{row.repository_id}} </td>
+        <td mat-cell *matCellDef="let row"> {{row.repository.name}} </td>
       </ng-container>
 
 
@@ -34,7 +34,6 @@
         <td mat-cell *matCellDef="let row">
           <a [routerLink]="row.id + '/edit' " *ngIf="row.state == 'draft'" ><mat-icon color="accent">edit</mat-icon></a>
           <a [routerLink]="row.id + '/edit' " *ngIf="row.state != 'draft'" ><mat-icon color="accent">info</mat-icon></a>
-          <mat-icon color="warn" *ngIf="row.state == 'waiting'" (click)="cancelOrder(row)">cancel</mat-icon>
           <mat-icon  color="warn" *ngIf="row.state == 'draft'" (click)="deleteOrder(row)">delete</mat-icon>
 
         </td>

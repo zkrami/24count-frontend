@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
-import {catchError, map} from 'rxjs/operators';
+import {catchError, map, switchMap} from 'rxjs/operators';
 import {AppConfigService} from './app-config.service';
 import {Observable, throwError} from 'rxjs';
 import {ApiResponse} from '../models/api-response';
@@ -82,5 +82,14 @@ export class ApiHttpClient {
 
   }
 
+
+  public file(url : string , body : any ){
+
+    return this.http.post(this.apiEndPoint +  url, body,  {responseType: 'arraybuffer'}).pipe(
+      catchError( err => {
+        this.appConfig.httpError(url , err);
+        return throwError(err);
+      }));
+  }
 
 }

@@ -20,3 +20,20 @@ tr{
 }
 
 
+.import-file-button{
+  &:focus{
+    outline:none;
+  }
+}
+.import-file-wrapper{
+
+  max-height: 0;
+  opacity: 0;
+  transition: all  0.5s ease-in-out ;
+  &.active{
+    max-height: 300px;
+    opacity: 1 ;
+  }
+  overflow: hidden;
+}
+

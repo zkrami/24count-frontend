@@ -2,6 +2,7 @@ import {OrderItem} from 'models/order-item';
 import {IToRequest} from 'models/to-request';
 import {RowState} from 'models/row-state';
 import {Pharmacy} from 'models/pharmacy';
+import {Repository} from 'models/repository';
 
 enum OrderState  {
 
@@ -19,6 +20,7 @@ export class Order implements IToRequest{
   static State = OrderState;
   id: number;
   repository_id: number;
+  repository:Repository;
   pharmacy_id: number;
   pharmacy:Pharmacy ;
   send_at: Date;

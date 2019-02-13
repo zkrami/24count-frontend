@@ -7,6 +7,7 @@ import {ItemDetailsInputComponent} from 'site/dashboard/repository-items/item-de
 import {ItemsFilterComponent} from 'site/dashboard/ui/items-filter/items-filter.component';
 import {Item} from 'models/item';
 import {ItemsService} from 'services/items.service';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-items',
@@ -18,13 +19,14 @@ export class ItemsComponent implements OnInit {
   repositoryItems: RepositoryItem[];
   selectedItem: RepositoryItem = RepositoryItem.init();
   dataSource: MatTableDataSource<RepositoryItem>;
-  displayedColumns: string[] = ['name', 'code', 'shape', 'identifier', 'size', 'factory', 'available', 'expiration', 'discount', 'bonus'];
+  displayedColumns: string[] = ['name', 'name_en', 'code', 'shape', 'identifier', 'size', 'factory', 'available', 'expiration', 'discount', 'bonus'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
 
   @ViewChild(ItemsFilterComponent) itemsFilter: ItemsFilterComponent;
   @ViewChild(ItemDetailsInputComponent) itemInput: ItemDetailsInputComponent;
   @ViewChild('filter') filter: ElementRef;
+  @ViewChild(MatSort) sort: MatSort;
+
 
   constructor(private repositoryService: RepositoryService, private toastr: ToastrService , private itemsService : ItemsService) {
   }
@@ -39,6 +41,7 @@ export class ItemsComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.filterPredicate = this.tableFilter;
     this.dataSource.filter = '';
+
   }
 
   filterFocus() {
@@ -138,5 +141,44 @@ export class ItemsComponent implements OnInit {
     }
   }
 
+
+
+  importFileWrapperVisible = false;
+  readonly maxSize = 1024 * 1024 * 10;  // max size 10 mb
+  readonly extensions = ["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" , "application/vnd.ms-excel"];
+  file:File = null ;
+  handleFileChange($event){
+    this.file = $event.target.files[0] ;
+  }
+
+  fileType = new FormControl();
+  async uploadFile() {
+
+
+    let file = this.file;
+    if (!file) {
+      return this.toastr.error("الرجاء تحديد ملف اولا");
+    }
+    if (!this.extensions.find(e => e == file.type)) {
+      return this.toastr.error("الرجاء تحديد ملف اكسل");
+    }
+    if (file.size > this.maxSize) {
+      return this.toastr.error(`حجم الملف يجب أن يكون أصغر من ${this.maxSize / (1024 * 1024)} mb`);
+    }
+
+
+
+    try {
+      let type = this.fileType.value ;
+      let items = await this.repositoryService.import(file , type).toPromise();
+      this.repositoryItems = items;
+      this.dataSource = new MatTableDataSource(this.repositoryItems);
+      this.refreshTable();
+      this.toastr.success("لقد تم استيراد المواد بنجاح");
+    }catch(e){
+      this.toastr.error("لقد حدث خطأ ما");
+    }
+
+  }
 
 }

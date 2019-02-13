@@ -1,9 +1,11 @@
 import {Injectable} from '@angular/core';
 import {ApiHttpClient} from 'services/api-http-client.service';
 import {Order} from 'models/order';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {Observable, of} from 'rxjs';
+import {map, switchMap} from 'rxjs/operators';
 import {OrderItem} from 'models/order-item';
+import { saveAs } from 'file-saver';
+
 
 @Injectable({
   providedIn: 'root'
@@ -66,5 +68,20 @@ export class RepositoryOrdersService {
       }
     ));
   }
+
+  export(order: Order , type:string): Observable<any> {
+
+    return this.http.file(`/repository/orders/${order.id}/export` , {type:type}).pipe(switchMap( (data) => {
+
+      let blob = new Blob([data]);
+      let url = window.URL.createObjectURL(blob);
+      console.log(blob);
+      console.log(url);
+      saveAs(blob,"24count.xls");
+      return of(url);
+    }));
+  }
+
+
 
 }

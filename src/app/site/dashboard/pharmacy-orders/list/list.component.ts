@@ -95,6 +95,7 @@ export class ListComponent implements OnInit {
 
   }
 
+  // deprecated
   cancelOrder(order: Order) {
 
 
