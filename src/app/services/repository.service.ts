@@ -30,10 +30,10 @@ export class RepositoryService {
       response => {
 
         let repository = Object.assign(new Repository(), response.data);
-        repository.items = response.data.items.map(it => {
+        repository.items = response.data.items.map(e => {
           let item = new RepositoryItem();
-          item = Object.assign(item, it.pivot);
-          item.item = Object.assign(new Item(), it);
+          item = Object.assign(item, e);
+          item.item = Object.assign(new Item(), e.item);
           return item;
         });
         return repository;
@@ -48,9 +48,8 @@ export class RepositoryService {
       // map response to RepositoryItem
       return response.data.map((e) => {
         let item = new RepositoryItem();
-        item = Object.assign(item, e.pivot);
-        //console.log(item.expiration);
-        item.item = Object.assign(new Item(), e);
+        item = Object.assign(item, e);
+        item.item = Object.assign(new Item(), e.item);
         return item;
       });
 

@@ -1,6 +1,7 @@
-import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {RepositoryItem} from 'models/repository-item';
 import {DateFieldComponent} from 'site/dashboard/ui/date-field/date-field.component';
+import {Bonus} from 'models/bonus';
 
 @Component({
   selector: 'app-item-details-input',
@@ -9,21 +10,48 @@ import {DateFieldComponent} from 'site/dashboard/ui/date-field/date-field.compon
 })
 export class ItemDetailsInputComponent implements OnInit {
 
-  @Input('item') repositoryItem: RepositoryItem;
+
+  repositoryItem: RepositoryItem;
   @Output('enterPressed') enterPressed = new EventEmitter<RepositoryItem>();
-  @ViewChild('expirationInput') expirationInput : DateFieldComponent;
+  @ViewChild('expirationInput') expirationInput: DateFieldComponent;
 
   constructor() {
   }
 
+  @Input('item') set _repositoryItem(value: RepositoryItem) {
+    this.repositoryItem = value;
+    this.fixBonus();
+  }
+
   ngOnInit() {
   }
-  focus() {
 
+  focus() {
     this.expirationInput.focus();
+  }
+
+  checkLast(index) {
+    let bonuses = this.repositoryItem.bonus;
+    if (index == bonuses.length - 1 && (bonuses[index].bonus && bonuses[index].bonus_each)) {
+      this.repositoryItem.bonus.push(new Bonus());
+    }
+
 
   }
 
+
+  fixBonus() {
+
+    let filtered = this.repositoryItem.bonus.filter(it => {
+      return (it.bonus || it.bonus_each);
+    });
+
+
+    this.repositoryItem.bonus = filtered;
+
+    this.repositoryItem.bonus.push(new Bonus());
+
+  }
 
 
   inputEnterPress() {

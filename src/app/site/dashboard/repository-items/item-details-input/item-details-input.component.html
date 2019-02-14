@@ -5,7 +5,7 @@
     </mat-form-field>
   </div>
   <div class="col-lg-2 checkbox-wrapper" >
-      <mat-checkbox (keydown)="inputKeyDown($event.code)" color="primary" [(ngModel)]="repositoryItem.available">متوفر</mat-checkbox>
+      <mat-checkbox (keydown)="inputKeyDown($event.code)"  color="primary" [(ngModel)]="repositoryItem.available">متوفر</mat-checkbox>
   </div>
   <div class="col-lg-2">
     <mat-form-field  class="full-width" color="primary">
@@ -13,16 +13,24 @@
     </mat-form-field>
   </div>
 
-  <div class="col-lg-1">
-    <mat-form-field  class="full-width" color="primary">
-      <input  type="number" [appMaxInt] max="1000000000" matInput (keydown)="inputKeyDown($event.code)" name="bonus_each"  placeholder="لكل" [(ngModel)]="repositoryItem.bonus_each" #bonus_each  />
-    </mat-form-field>
+  <div class="col-lg-2 no-padding">
+    <div class="bonus-wrapper">
+    <div class="row" *ngFor="let bonus of repositoryItem.bonus ; let i = index">
+    <div class="col-6 ">
+      <mat-form-field  class="full-width" color="primary" >
+        <input  type="number" [appMaxInt] max="1000000000" matInput (keydown)="inputKeyDown($event.code)" (keyup)="checkLast(i)"    name="bonus_each"  placeholder="لكل" [(ngModel)]="bonus.bonus_each" />
+      </mat-form-field>
+    </div>
+    <div class="col-6">
+      <mat-form-field  class="full-width" color="primary" >
+        <input type="number" [appMaxInt] max="1000000000" matInput (keydown)="inputKeyDown($event.code)" (keyup)="checkLast(i)" name="bonus"  placeholder="بونص" [appLessThan]="bonus.bonus_each" [(ngModel)]="bonus.bonus"  />
+      </mat-form-field>
+    </div>
+    </div>
+    </div>
+
   </div>
-  <div class="col-lg-1">
-    <mat-form-field  class="full-width" color="primary">
-      <input type="number" [appMaxInt] max="1000000000" matInput (keydown)="inputKeyDown($event.code)" name="bonus"  placeholder="بونص" [appLessThan]="bonus_each.value" [(ngModel)]="repositoryItem.bonus"  />
-    </mat-form-field>
-  </div>
+
 
   <div class="col-lg-2 button-wrapper">
     <button mat-button color="primary" mat-flat-button class="full-width" (click)="inputEnterPress()">حفظ</button>

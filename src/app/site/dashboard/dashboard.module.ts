@@ -35,7 +35,7 @@ let routes: Routes = [
         path: '', canActivateChild: [AuthGuard], children: [
 
           {path: 'config', component: ConfigComponent},
-          {path : 'main' , component: MainComponent}
+          {path: 'main', component: MainComponent}
         ]
       },
       {
@@ -61,7 +61,7 @@ let routes: Routes = [
       }
       , // default
       {
-        path:'**' , pathMatch:'full' , redirectTo:'/dashboard/main'
+        path: '**', pathMatch: 'full', redirectTo: '/dashboard/main'
       }
 
     ]
