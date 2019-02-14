@@ -8,10 +8,12 @@ import {RequestInterceptor} from 'interceptors/request-interceptor.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DashboardModule} from 'site/dashboard/dashboard.module';
 import {ToastrModule} from 'ngx-toastr';
+import { PharmacyRequirementsComponent } from './services/pharmacy-requirements/pharmacy-requirements.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PharmacyRequirementsComponent
   ],
   imports: [
     BrowserModule,

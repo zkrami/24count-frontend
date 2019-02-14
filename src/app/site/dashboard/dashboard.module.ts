@@ -17,11 +17,14 @@ import {RepositoryModule} from 'site/dashboard/repository/repository.module';
 import {DetailsComponent as RepositoryDetailsComponent} from 'site/dashboard/repository/details/details.component';
 import {RepositoryGuard} from 'guards/repository.guard';
 import {PharmacistGuard} from 'guards/pharmacist.guard';
-import {ListComponent as RepositoryOrdersListComponent } from 'site/dashboard/repository-orders/list/list.component';
+import {ListComponent as RepositoryOrdersListComponent} from 'site/dashboard/repository-orders/list/list.component';
 import {DetailsComponent as RepositoryOrderEditComponent} from 'site/dashboard/repository-orders/details/details.component';
 import {RepositoryOrdersModule} from 'site/dashboard/repository-orders/repository-orders.module';
 import {ConfigComponent} from 'site/dashboard/config/config/config.component';
 import {ConfigModule} from 'site/dashboard/config/config.module';
+import {PharmacyComponent as PharmacyMainComponent} from 'site/dashboard/main/pharmacy/pharmacy.component';
+import {MainModule} from 'site/dashboard/main/main.module';
+import {MainComponent} from 'site/dashboard/main/main/main.component';
 
 
 let routes: Routes = [
@@ -29,9 +32,10 @@ let routes: Routes = [
     path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard],
     children: [
       { //user
-        path:'' , canActivateChild :[AuthGuard] , children : [
+        path: '', canActivateChild: [AuthGuard], children: [
 
-          {path:'config' ,   component : ConfigComponent}
+          {path: 'config', component: ConfigComponent},
+          {path : 'main' , component: MainComponent}
         ]
       },
       {
@@ -52,7 +56,12 @@ let routes: Routes = [
           {path: 'pharmacy/orders/create/:repository', component: OrderCreateComponent},
           {path: 'pharmacy/orders/:id/edit', component: OrderEditComponent},
           {path: 'pharmacy/orders', component: OrdersListComponent},
+          {path: 'pharmacy/main', component: PharmacyMainComponent}
         ]
+      }
+      , // default
+      {
+        path:'**' , pathMatch:'full' , redirectTo:'/dashboard/main'
       }
 
     ]
@@ -69,7 +78,8 @@ let routes: Routes = [
     PharmacyOrdersModule,
     RepositoryModule,
     RepositoryOrdersModule,
-    ConfigModule ,
+    ConfigModule,
+    MainModule,
     RouterModule.forChild(routes)
   ]
 })

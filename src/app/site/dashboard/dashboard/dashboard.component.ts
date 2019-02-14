@@ -15,6 +15,7 @@ export class DashboardComponent implements OnInit {
     this.layoutService.menuTriggered.subscribe( menuOpen => {
       this.menuOpen = menuOpen;
     });
+
   }
 
 }

@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../../services/auth.service';
-import {of, throwError as observableThrowError, throwError} from 'rxjs';
-import {catchError, finalize, map, switchMap} from 'rxjs/operators';
 import {ToastrService} from 'ngx-toastr';
-import {Form, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 
 @Component({
@@ -24,54 +22,57 @@ export class LoginComponent implements OnInit {
 
   loginForm = new FormGroup(
     {
-      email : this.emailFormControl,
-      password : this.passwordFormControl
+      email: this.emailFormControl,
+      password: this.passwordFormControl
     }
   );
+  disabled: boolean = false;
 
-
-  constructor(private authService: AuthService , private toastr : ToastrService , private router : Router) {
+  constructor(private authService: AuthService, private toastr: ToastrService, private router: Router) {
 
   }
 
   ngOnInit() {
 
-    if(this.authService.loggedIn)
+    if (this.authService.loggedIn) {
       this.navigate();
+    }
   }
 
-
-  navigate(){
+  navigate() {
     this.router.navigate(['/dashboard']);
 
   }
 
-  disabled:boolean = false;
-  disable(){
+  disable() {
 
-    this.disabled = true ;
+    this.disabled = true;
     this.emailFormControl.disable();
     this.passwordFormControl.disable();
   }
-  enable(){
+
+  enable() {
     this.disabled = false;
     this.passwordFormControl.enable();
     this.emailFormControl.enable();
   }
-  async submit(e : Event  ) {
+
+  async submit(e: Event) {
 
 
-    if(this.disabled) return ;
+    if (this.disabled) {
+      return;
+    }
     this.disable();
     try {
       let response = await this.authService.login(this.emailFormControl.value, this.passwordFormControl.value).toPromise();
-      this.toastr.success("تم تسجيل الدخول بنجاح");
+      this.toastr.success('تم تسجيل الدخول بنجاح');
       this.navigate();
 
     } catch (e) {
 
-      this.toastr.error("اسم المستخدم او كلمة المرور غير صالحة");
-    }finally {
+      this.toastr.error('اسم المستخدم او كلمة المرور غير صالحة');
+    } finally {
       this.enable();
     }
   }

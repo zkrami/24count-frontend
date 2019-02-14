@@ -58,6 +58,9 @@ export class ItemsFilterComponent implements OnInit {
   _filter(value: string): Item[] {
 
     return this.items.filter(item => {
+
+      if(typeof value !== 'string') return true ;
+
       return item.name_en.toLowerCase().includes(value.toLowerCase()) || item.name.includes(value) || value === item.code ;
     });
   }
