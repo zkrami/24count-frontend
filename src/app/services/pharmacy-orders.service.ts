@@ -63,14 +63,13 @@ export class PharmacyOrdersService {
   }
 
 
-  export(order: Order , type : string): Observable<any> {
+  export(order: Order ): Observable<any> {
 
-    return this.http.file(`/pharmacy/orders/${order.id}/export` , {type:type}).pipe(switchMap( (data) => {
+    return this.http.file(`/pharmacy/orders/${order.id}/export` ).pipe(switchMap( (data) => {
 
       let blob = new Blob([data]);
       let url = window.URL.createObjectURL(blob);
-      console.log(blob);
-      console.log(url);
+
       saveAs(blob,"24count.xls");
       return of(url);
     }));

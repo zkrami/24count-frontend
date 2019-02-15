@@ -83,7 +83,7 @@ export class ApiHttpClient {
   }
 
 
-  public file(url : string , body : any ){
+  public file(url : string , body : any = {} ){
 
     return this.http.post(this.apiEndPoint +  url, body,  {responseType: 'arraybuffer'}).pipe(
       catchError( err => {

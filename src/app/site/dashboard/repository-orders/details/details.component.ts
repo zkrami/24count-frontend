@@ -144,10 +144,9 @@ export class DetailsComponent implements OnInit {
 
 
 
-  fileType = new FormControl();
   async exportOrder() {
     try {
-        await this.orderService.export(this.order , this.fileType.value).toPromise();
+        await this.orderService.export(this.order ).toPromise();
     } catch (e) {
         this.toastr.error("لقد حدث خطأ ما");
     }

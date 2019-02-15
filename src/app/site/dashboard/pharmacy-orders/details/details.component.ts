@@ -212,10 +212,9 @@ export class DetailsComponent implements OnInit {
       this.order.items.push(new OrderItem({item_id: item.id, count: count, item: item}));
     }
   }
-  fileType = new FormControl();
   async exportOrder() {
     try {
-      await this.orderService.export(this.order , this.fileType.value).toPromise();
+      await this.orderService.export(this.order).toPromise();
     } catch (e) {
       this.toastr.error("لقد حدث خطأ ما");
     }
