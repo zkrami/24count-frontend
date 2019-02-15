@@ -6,6 +6,7 @@ import {RepositoryItem} from 'models/repository-item';
 import {Repository} from 'models/repository';
 import {Item} from 'models/item';
 import {HttpHeaders} from '@angular/common/http';
+import {Bonus} from 'models/bonus';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,7 @@ export class RepositoryService {
           let item = new RepositoryItem();
           item = Object.assign(item, e);
           item.item = Object.assign(new Item(), e.item);
+          item.bonus = item.bonus.map( x => Object.assign(new Bonus() , x));
           return item;
         });
         return repository;

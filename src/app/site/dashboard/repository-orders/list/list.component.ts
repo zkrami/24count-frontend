@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatDialog, MatPaginator, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {Order} from 'models/order';
 import {ToastrService} from 'ngx-toastr';
 import {RepositoryOrdersService} from 'services/repository-orders.service';
@@ -14,6 +14,7 @@ export class ListComponent implements OnInit {
   displayedColumns: string[] = ['id', 'created_at', 'pharmacy', 'state', 'actions'];
   dataSource: MatTableDataSource<Order>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   orders: Order[];
 
@@ -26,6 +27,7 @@ export class ListComponent implements OnInit {
     this.orders = await this.repositoryOrdersService.get().toPromise();
     this.dataSource = new MatTableDataSource(this.orders);
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
 
   }
 

@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
   }
 
   navigate() {
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/dashboard' , 'main']);
 
   }
 
