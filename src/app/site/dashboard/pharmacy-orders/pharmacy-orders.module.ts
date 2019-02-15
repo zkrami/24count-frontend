@@ -6,9 +6,10 @@ import { DetailsComponent } from './details/details.component';
 import { EditComponent } from './edit/edit.component';
 import {SharedModule} from 'core-modules/shared/shared.module';
 import {UIModule} from 'site/dashboard/ui/ui.module';
+import { RepositoryItemsComponent } from './repository-items/repository-items.component';
 
 @NgModule({
-  declarations: [CreateComponent, ListComponent, DetailsComponent, EditComponent],
+  declarations: [CreateComponent, ListComponent, DetailsComponent, EditComponent, RepositoryItemsComponent],
   imports: [
     CommonModule ,
     SharedModule ,
