@@ -110,10 +110,10 @@ export class DetailsComponent implements OnInit {
     this.selectedItem = $item;
   }
 
+
   refreshTable() {
     this.dataSource._updateChangeSubscription();
   }
-
   async save() {
 
 
