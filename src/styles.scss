@@ -17,6 +17,28 @@ $app-theme:mat-light-theme($app-primary, $app-accent, $app-warn);
 //@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
 
 
+
+// font
+
+
+// Define a custom typography config that overrides the font-family as well as the
+// `headlines` and `body-1` levels.
+$custom-typography: mat-typography-config(
+  $font-family: 'Tajawal, monospace',
+  $headline: mat-typography-level(32px, 48px, 700),
+  $body-1: mat-typography-level(16px, 24px, 500)
+);
+
+@include mat-base-typography($custom-typography);
+// Override typography for a specific Angular Material components.
+//@include mat-checkbox-typography($custom-typography);
+@include mat-table-typography($custom-typography);
+// Override typography for all Angular Material, including mat-base-typography and all components.
+@include angular-material-typography($custom-typography);
+.mat-header-cell{
+  font-size:15px;
+}
+
 html,body{
    height:100%;
   padding:0;
