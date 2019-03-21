@@ -11,9 +11,8 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  emailFormControl = new FormControl('', [
+  usernameFormController = new FormControl('', [
     Validators.required,
-    Validators.email,
   ]);
 
   passwordFormControl = new FormControl('', [
@@ -22,7 +21,7 @@ export class LoginComponent implements OnInit {
 
   loginForm = new FormGroup(
     {
-      email: this.emailFormControl,
+      username: this.usernameFormController,
       password: this.passwordFormControl
     }
   );
@@ -47,14 +46,14 @@ export class LoginComponent implements OnInit {
   disable() {
 
     this.disabled = true;
-    this.emailFormControl.disable();
+    this.usernameFormController.disable();
     this.passwordFormControl.disable();
   }
 
   enable() {
     this.disabled = false;
     this.passwordFormControl.enable();
-    this.emailFormControl.enable();
+    this.usernameFormController.enable();
   }
 
   async submit(e: Event) {
@@ -65,7 +64,7 @@ export class LoginComponent implements OnInit {
     }
     this.disable();
     try {
-      let response = await this.authService.login(this.emailFormControl.value, this.passwordFormControl.value).toPromise();
+      let response = await this.authService.login(this.usernameFormController.value, this.passwordFormControl.value).toPromise();
       this.toastr.success('تم تسجيل الدخول بنجاح');
       this.navigate();
 

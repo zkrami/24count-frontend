@@ -53,9 +53,9 @@ export class AuthService {
     ));
   }
 
-  public login(email: string, password: string, remember: boolean = true) : Observable<ApiResponse> {
+  public login(username: string, password: string, remember: boolean = true) : Observable<ApiResponse> {
 
-    return this.http.post('/login', {email: email, password: password}).pipe(
+    return this.http.post('/login', {username , password}).pipe(
       tap(apiResponse => {
         this.storeUser(apiResponse.data, remember);
       })
