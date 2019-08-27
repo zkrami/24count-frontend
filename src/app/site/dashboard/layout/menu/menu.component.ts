@@ -10,7 +10,7 @@ import {User} from 'models/user';
 })
 export class MenuComponent implements OnInit {
 
-  constructor(private layoutService : LayoutService , private auth : AuthService) { }
+  constructor(private layoutService : LayoutService , public auth : AuthService) { }
 
   menuOpen : boolean = true ;
   ngOnInit() {
